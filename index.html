@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Studio-D Brickell — Premium Hair Salon · Miami</title>
+<meta name="description" content="Studio-D Brickell — Full-service premium salon in Mary Brickell Village, Miami. 20+ years, 25+ professionals. Book your appointment today.">
+<meta name="theme-color" content="#0B0B0B">
+<meta property="og:title" content="Studio-D Brickell · Premium Salon">
+<meta property="og:description" content="Come as you are, leave at your best. Full-service premium salon in the heart of Brickell, Miami.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--surface:#F8F8F8;--border:rgba(184,134,11,0.2);--text:#1A1A1A;--muted:#666666;--gold:#B8860B;--gold-glow:rgba(184,134,11,0.3);--glass:rgba(255,255,255,0.9);--accent:rgba(184,134,11,0.05);--wa:#25D366;--blue:#0024F8}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Roboto',sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a,button{-webkit-tap-highlight-color:transparent;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+/* CANVAS BG */
+#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* LOGO */
+.logo-img{width:90%;max-width:320px;height:auto;object-fit:contain;padding:10px;margin:0 auto 1.5rem;display:block;filter:drop-shadow(0 4px 15px rgba(0,0,0,0.15));transition:transform 0.5s ease}
+.logo-img:hover{transform:scale(1.02)}
+
+/* TEAM */
+.team-scroll{display:flex;gap:0.8rem;overflow-x:auto;padding-bottom:0.8rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.team-scroll::-webkit-scrollbar{display:none}
+.team-card{flex:0 0 140px;height:180px;scroll-snap-align:start;text-align:center;padding:1rem 0.6rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;transition:all 0.3s;display:flex;flex-direction:column;justify-content:flex-end}
+.team-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.team-name{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.15rem;text-shadow:0 1px 4px rgba(0,0,0,0.9)}
+.team-role{font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;line-height:1.2;text-shadow:0 1px 4px rgba(0,0,0,0.9)}
+.team-exp{font-size:0.6rem;color:#ddd;margin-top:0.3rem;text-shadow:0 1px 4px rgba(0,0,0,0.9)}
+
+/* LANG */
+.lang-bar{position:sticky;top:0;z-index:100;display:flex;justify-content:center;padding:0.5rem;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.lang-btn{background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.3);color:var(--gold);padding:0.35rem 1rem;border-radius:20px;font-size:0.8rem;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:6px;font-weight:600;letter-spacing:0.5px}
+
+/* SALON SLIDER */
+.salon-slider{position:relative;width:100%;height:240px;overflow:hidden;margin-bottom:2rem;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.salon-track{display:flex;height:100%;transition:transform 0.7s cubic-bezier(0.25, 1, 0.5, 1)}
+.salon-slide{flex:0 0 100%;height:100%;position:relative}
+.salon-slide img{width:100%;height:100%;object-fit:cover}
+.salon-overlay-text{position:absolute;bottom:0;left:0;width:100%;padding:2rem 1rem 1rem;background:linear-gradient(0deg,rgba(0,0,0,0.6) 0%,transparent 100%);color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;text-align:center;letter-spacing:1px}
+
+/* CONTAINER */
+.container{max-width:480px;margin:0 auto;position:relative;z-index:10}
+
+/* HERO */
+.hero{text-align:center;padding:0}
+.hero-banner{position:relative;width:100%;height:55vh;min-height:420px;max-height:600px;border-radius:0 0 32px 32px;overflow:hidden;margin-bottom:2rem;box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.hero-banner > img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(0.9) saturate(1.1);transition:transform 6s ease-out}
+.hero-banner:hover > img{transform:scale(1.05)}
+.hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.4) 60%,rgba(255,255,255,0.95) 100%)}
+.hero-content{padding:0 1.5rem 2rem;text-align:center;position:relative;z-index:2;margin-top:-1rem}
+.tagline{font-family:'Playfair Display',serif;font-size:1.3rem;color:#8B6914;font-weight:700;font-style:italic;margin-bottom:0.3rem;letter-spacing:0.5px;text-shadow:0 1px 3px rgba(255,255,255,0.8)}
+.tagline-sub{font-size:0.8rem;color:var(--muted);margin-bottom:1.8rem}
+
+/* GALLERY */
+.gallery{padding:0 0 2rem}
+.gallery-title{font-size:0.85rem;color:var(--text);text-transform:uppercase;letter-spacing:2px;font-weight:700;padding:0 1.5rem;margin-bottom:1rem;text-align:center;font-family:'Playfair Display',serif}
+.gallery-wrapper{position:relative}
+.gallery-scroll{display:flex;gap:1rem;overflow-x:auto;padding:0 1.5rem 1rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.gallery-scroll::-webkit-scrollbar{display:none}
+.gallery-item{flex:0 0 85%;height:420px;border-radius:16px;overflow:hidden;scroll-snap-align:center;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.08);background:var(--surface)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-caption{position:absolute;bottom:0;left:0;width:100%;padding:2rem 1.5rem 1.5rem;background:linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 100%);color:#fff;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;pointer-events:none}
+.gallery-dots{display:flex;justify-content:center;gap:8px;margin-top:0.5rem}
+.gallery-dots span{width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,0.3);transition:all 0.3s;cursor:pointer}
+.gallery-dots span.active{background:var(--gold);transform:scale(1.3)}
+
+
+/* CHAT AI */
+.chat-fab{position:fixed;bottom:24px;right:16px;z-index:200;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);border:none;cursor:pointer;box-shadow:0 4px 20px var(--gold-glow);display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:transform 0.3s;animation:pulse-fab 2s infinite}
+@keyframes pulse-fab{0%,100%{box-shadow:0 4px 20px var(--gold-glow)}50%{box-shadow:0 4px 30px rgba(201,168,76,0.6)}}
+.chat-fab:hover{transform:scale(1.1)}
+.chat-panel{position:fixed;bottom:24px;right:16px;z-index:201;width:340px;max-width:calc(100vw - 32px);height:440px;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.chat-panel.open{display:flex}
+.chat-head{padding:0.8rem 1rem;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(255,255,255,0.9));border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem}
+.chat-head-name{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:600;color:var(--text)}
+.chat-head-sub{font-size:0.6rem;color:var(--gold)}
+.chat-close{margin-left:auto;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer}
+.chat-body{flex:1;overflow-y:auto;padding:0.8rem;display:flex;flex-direction:column;gap:0.6rem}
+.chat-msg{max-width:85%;padding:0.6rem 0.8rem;border-radius:12px;font-size:0.8rem;line-height:1.4;animation:fadeUp 0.3s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.chat-msg.bot{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.2);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-msg.user{background:rgba(0,0,0,0.08);color:var(--text);align-self:flex-end;border-bottom-right-radius:4px}
+.chat-msg.cta{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);padding:0.8rem;text-align:center}
+.chat-msg.cta a{display:inline-block;margin:0.3rem;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.3s}
+.chat-input-row{display:flex;gap:0.4rem;padding:0.6rem;border-top:1px solid var(--border);background:rgba(255,255,255,0.8)}
+.chat-input{flex:1;background:rgba(0,0,0,0.04);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.7rem;color:var(--text);font-size:0.8rem;font-family:'Roboto',sans-serif;outline:none}
+.chat-input:focus{border-color:var(--gold)}
+.chat-send{background:var(--gold);border:none;border-radius:8px;padding:0.5rem 0.8rem;color:#000;font-weight:700;cursor:pointer;font-size:0.8rem}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed}
+
+/* BEAUTY SPOTLIGHT & SPARKLE EFFECTS */
+@keyframes spotlight{0%{opacity:0.4;transform:translateX(-30%)}50%{opacity:0.7}100%{opacity:0.4;transform:translateX(30%)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+@keyframes reveal{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.reveal{animation:reveal 0.8s ease-out both}
+.hero-banner::after{content:'';position:absolute;top:0;left:0;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.06),transparent);animation:spotlight 8s ease-in-out infinite;pointer-events:none;z-index:1}
+
+/* KERASTASE BANNER */
+.kerastase-strip{display:flex;align-items:center;gap:0.8rem;padding:1rem 1.2rem;background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(255,255,255,0.9));border:1px solid rgba(201,168,76,0.25);border-radius:10px;margin:0 1.5rem 1.2rem;box-shadow:0 5px 15px rgba(0,0,0,0.05)}
+.kerastase-strip img{width:60px;height:60px;object-fit:contain;border-radius:8px}
+.kerastase-strip .ks-text{font-size:0.75rem;color:var(--muted);line-height:1.4}
+.kerastase-strip .ks-title{font-family:'Playfair Display',serif;font-size:0.85rem;color:var(--gold);font-weight:600;margin-bottom:0.15rem}
+
+/* TESTIMONIAL CAROUSEL */
+.testimonial-card{position:relative;padding:1.5rem;min-height:120px}
+.testimonial-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:0.9rem;color:var(--text);line-height:1.6;margin-bottom:0.8rem}
+.testimonial-author{font-size:0.75rem;color:var(--gold);font-weight:500}
+.testimonial-dots{display:flex;justify-content:center;gap:6px;margin-top:0.8rem}
+.testimonial-dots span{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:all 0.3s}
+.testimonial-dots span.active{background:var(--gold);transform:scale(1.3)}
+
+/* PAYMENT METHODS */
+.pay-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem}
+.pay-chip{padding:0.3rem 0.6rem;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid var(--border);font-size:0.65rem;color:var(--muted)}
+.hero-stats{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem}
+.stat{text-align:center}
+.stat-num{font-family:'Roboto Slab',serif;font-size:1.6rem;font-weight:700;color:var(--text)}
+.stat-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+
+/* BUTTONS */
+.btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0.6rem 0.8rem;border-radius:10px;font-family:'Roboto',sans-serif;font-weight:600;font-size:0.8rem;text-decoration:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);border:none;cursor:pointer}
+.btn-book{background:linear-gradient(135deg,var(--gold) 0%,#EED48F 50%,#A68A3D 100%);color:#000;box-shadow:0 6px 20px rgba(201,168,76,0.4), inset 0 2px 5px rgba(255,255,255,0.4);grid-column:1/-1;min-height:54px;font-size:1rem;border-radius:14px;letter-spacing:1px;text-transform:uppercase;font-weight:800;position:relative;overflow:hidden;border:1px solid rgba(255,215,0,0.3)}
+.btn-book::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);transform:skewX(-20deg);animation:shimmerBtn 2.5s infinite}
+@keyframes shimmerBtn{0%{left:-100%}20%{left:200%}100%{left:200%}}
+.btn-book:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 30px rgba(201,168,76,0.6), inset 0 2px 5px rgba(255,255,255,0.5)}
+.btn-call{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px)}
+.btn-call:hover{background:rgba(255,255,255,0.1);border-color:var(--gold)}
+.btn-wa{background:rgba(37,211,102,0.15);color:#1A994A;border:1px solid rgba(37,211,102,0.4)}
+.btn-wa:hover{background:rgba(37,211,102,0.25);border-color:#1A994A}
+.btn-email{background:rgba(234,67,53,0.15);color:#C33025;border:1px solid rgba(234,67,53,0.4)}
+.btn-email:hover{background:rgba(234,67,53,0.25);border-color:#C33025}
+.btn-full{grid-column:1/-1}
+
+.review-btn-hero{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:0.8rem;border-radius:14px;background:linear-gradient(135deg,rgba(251,188,4,0.15),rgba(251,188,4,0.05));border:1px solid rgba(251,188,4,0.5);color:#C59000;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);min-height:50px;letter-spacing:0.5px;text-transform:uppercase;box-shadow:0 4px 15px rgba(251,188,4,0.15)}
+.review-btn-hero:hover{background:rgba(251,188,4,0.25);border-color:#FBBC04;transform:translateY(-2px) scale(1.01);box-shadow:0 8px 25px rgba(251,188,4,0.25)}
+
+/* REVIEWS */
+.stars{color:#FBBC04;font-size:1.6rem;letter-spacing:3px;margin-bottom:0.4rem;text-shadow:0 0 10px rgba(251,188,4,0.4)}
+.review-score{font-family:'Roboto Slab',serif;font-size:2.2rem;font-weight:800;color:var(--text);margin-right:0.6rem}
+.review-count{font-size:0.85rem;color:var(--muted)}
+.review-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:0.8rem;border-radius:14px;background:linear-gradient(135deg,rgba(251,188,4,0.15),rgba(251,188,4,0.05));border:1px solid rgba(251,188,4,0.5);color:#FBBC04;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);min-height:50px;letter-spacing:0.5px;text-transform:uppercase;margin-top:1.5rem;box-shadow:0 4px 15px rgba(251,188,4,0.15)}
+.review-btn:hover{background:rgba(251,188,4,0.25);border-color:#FBBC04;transform:translateY(-2px) scale(1.01);box-shadow:0 8px 25px rgba(251,188,4,0.25)}
+
+/* HOURS */
+.hours-grid{display:grid;gap:0.4rem}
+.hours-row{display:flex;justify-content:space-between;font-size:0.85rem;padding:0.4rem 0;border-bottom:1px solid var(--border)}
+.hours-row:last-child{border:none}
+.hours-day{color:var(--muted)}
+.hours-time{color:var(--text);font-weight:500}
+.open-badge{display:inline-flex;align-items:center;gap:5px;padding:0.3rem 0.7rem;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
+.open-badge.is-open{background:rgba(37,211,102,0.15);color:#25D366;border:1px solid rgba(37,211,102,0.3)}
+.open-badge.is-closed{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)}
+.open-dot{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite}
+.is-open .open-dot{background:#25D366}
+.is-closed .open-dot{background:#ef4444}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* MAP */
+.map-wrap{border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem;aspect-ratio:16/10}
+.map-wrap iframe{width:100%;height:100%;border:0}
+.addr-text{font-size:0.85rem;color:var(--muted);margin-bottom:0.3rem}
+.addr-landmark{font-size:0.75rem;color:var(--gold);margin-bottom:1rem}
+.btn-map{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:0.8rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.85rem;font-weight:600;transition:all 0.3s;cursor:pointer}
+.btn-map:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+
+/* SOCIAL */
+.social-row{display:flex;justify-content:center;gap:1rem}
+.social-link{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--glass);transition:all 0.3s}
+.social-link:hover{border-color:var(--gold);transform:translateY(-2px)}
+.social-link svg{width:20px;height:20px;fill:var(--text)}
+
+/* SERVICES */
+.sec-desc{font-size:0.8rem;color:var(--muted);margin-bottom:1.2rem}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;padding:0 1.5rem;margin-bottom:2rem}
+.svc-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.2rem 0.5rem;border-radius:12px;background:rgba(255,255,255,0.8);border:1px solid rgba(201,168,76,0.2);box-shadow:0 4px 15px rgba(0,0,0,0.03);text-decoration:none;color:var(--text);transition:all 0.3s}
+.svc-item:hover{border-color:var(--gold);background:rgba(255,255,255,1);box-shadow:0 6px 20px rgba(201,168,76,0.15);transform:translateY(-2px)}
+.svc-icon{font-size:1.4rem;margin-bottom:0.3rem}
+.svc-name{font-size:0.75rem;font-weight:600;line-height:1.2;margin-bottom:0.15rem}
+.svc-detail{font-size:0.6rem;color:var(--muted);line-height:1.2}
+
+/* ABOUT */
+.about-text{font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+.about-badge{display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1rem;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:8px;font-size:0.8rem;color:var(--gold);font-weight:500}
+
+/* SHOP */
+.promo-highlight{font-size:0.9rem;color:var(--text);margin-bottom:1rem;font-weight:500}
+.shop-btns{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.btn-shop{display:flex;align-items:center;justify-content:center;gap:6px;padding:0.8rem;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);font-size:0.85rem;font-weight:600;transition:all 0.3s}
+.btn-shop:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+
+/* WEB LINK */
+.web-link{transition:all 0.3s;cursor:pointer}
+.web-link:hover{border-color:var(--gold)!important}
+
+/* PRICES BTN */
+.btn-prices{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:0.6rem;padding:0.8rem;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);font-size:0.85rem;font-weight:600;transition:all 0.3s}
+.btn-prices:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+
+/* PROMO */
+.promo-card{background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(253,251,247,0.85));backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:10px;padding:1.5rem;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.05)}
+.promo-badge{display:inline-block;padding:0.25rem 0.8rem;border-radius:20px;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);margin-bottom:0.8rem}
+.promo-title{font-family:'Roboto Slab',serif;font-size:1rem;font-weight:600;color:var(--text);margin-bottom:0.4rem;line-height:1.3}
+.promo-text{font-size:0.75rem;color:var(--muted);margin-bottom:1rem}
+.promo-btn{display:inline-flex;align-items:center;gap:4px;padding:0.6rem 1.2rem;border-radius:8px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-size:0.8rem;font-weight:600;transition:all 0.3s}
+.promo-btn:hover{background:rgba(201,168,76,0.25);border-color:var(--gold)}
+
+/* SECTIONS & GLASS CARDS */
+.section{padding:0 1.5rem 1.5rem}
+.glass-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:0 8px 25px rgba(0,0,0,0.04)}
+.sec-sub{font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:0.5rem}
+.sec-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:0.8rem}
+
+/* FOOTER */
+.footer{text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--border)}
+.footer-logo{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.footer-link{font-size:0.65rem;color:var(--gold);text-decoration:none}
+.footer-link:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+
+<!-- LANG SELECTOR -->
+<div class="lang-bar">
+<button class="lang-btn" id="langCycleBtn" onclick="cycleLang()">🌐 English</button>
+</div>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-banner">
+<img src="https://www.studio-dbrickell.com/wp-content/uploads/2023/04/PHOTO-2022-02-28-12-33-06-9-copy.jpg" alt="Studio-D Brickell Salon" loading="eager">
+<div class="hero-overlay">
+<img class="logo-img" src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/LOGO-2.png" alt="Studio-D Brickell">
+</div>
+</div>
+<div class="hero-content">
+<div class="tagline" data-en="Come as you are, Leave at your best" data-pt="Venha como você é, Saia no seu melhor" data-es="Ven como eres, Sal en tu mejor versión"></div>
+<div class="tagline-sub" data-en="Full-Service Premium Salon · Est. 2002" data-pt="Salão Premium Completo · Est. 2002" data-es="Salón Premium de Servicio Completo · Est. 2002"></div>
+<div class="hero-stats">
+<div class="stat"><div class="stat-num">20+</div><div class="stat-label" data-en="Years" data-pt="Anos" data-es="Años"></div></div>
+<div class="stat"><div class="stat-num">45+</div><div class="stat-label" data-en="Services" data-pt="Serviços" data-es="Servicios"></div></div>
+<div class="stat"><div class="stat-num">25+</div><div class="stat-label" data-en="Pros" data-pt="Profissionais" data-es="Profesionales"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem;">
+<div class="btn-grid" style="margin-bottom: 0;">
+<a class="btn btn-book" href="https://booking.mangomint.com/667750" target="_blank" rel="noopener">
+<span data-en="📅 Book Appointment" data-pt="📅 Agendar Horário" data-es="📅 Agendar Cita"></span>
+</a>
+<a class="btn review-btn-hero" href="https://g.page/r/CblyiDU7hjArEBE/review" target="_blank" rel="noopener">
+<span data-en="⭐ Leave a Review" data-pt="⭐ Deixe sua Avaliação" data-es="⭐ Deja tu Reseña"></span>
+</a>
+</div>
+<div style="display: flex; gap: 0.6rem; justify-content: space-between;">
+<a class="btn btn-call" href="tel:+13053494969" style="flex: 1; padding: 0.8rem 0; text-align: center; display: flex; justify-content: center; align-items: center; border-radius: 8px;">
+<span data-en="📞 Call" data-pt="📞 Ligar" data-es="📞 Llamar" style="font-size: 0.85rem;"></span>
+</a>
+<a class="btn btn-wa" href="https://wa.me/13053494969?text=Hi%20Studio-D!%20I'd%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener" style="flex: 1; padding: 0.8rem 0; text-align: center; display: flex; justify-content: center; align-items: center; border-radius: 8px;">
+<span data-en="💬 WA" data-pt="💬 WA" data-es="💬 WA" style="font-size: 0.85rem;"></span>
+</a>
+<a class="btn btn-email" href="mailto:info@studio-dbrickell.com?subject=Appointment%20Request" style="flex: 1; padding: 0.8rem 0; text-align: center; display: flex; justify-content: center; align-items: center; border-radius: 8px;">
+<span data-en="✉️ Email" data-pt="✉️ Email" data-es="✉️ Email" style="font-size: 0.85rem;"></span>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EXPERIENCE SLIDER -->
+<section style="padding: 0 1.5rem; margin-bottom: 2rem;">
+	<div class="salon-slider">
+		<div class="salon-track" id="salonTrack">
+			<div class="salon-slide">
+				<img src="https://images.unsplash.com/photo-1521590832167-7bfc17484d20?auto=format&fit=crop&w=800&q=80" alt="Salon Interior" loading="lazy">
+				<div class="salon-overlay-text" data-en="Luxurious Atmosphere" data-es="Atmósfera Lujosa" data-pt="Atmosfera Luxuosa"></div>
+			</div>
+			<div class="salon-slide">
+				<img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80" alt="Salon Experience" loading="lazy">
+				<div class="salon-overlay-text" data-en="20+ Years of Excellence" data-es="20+ Años de Excelencia" data-pt="20+ Anos de Excelência"></div>
+			</div>
+			<div class="salon-slide">
+				<img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80" alt="Premium Service" loading="lazy">
+				<div class="salon-overlay-text" data-en="Premium Quality Service" data-es="Servicio de Calidad Premium" data-pt="Serviço de Qualidade Premium"></div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- SERVICES -->
+<section style="margin-bottom: 2rem;">
+	<div class="gallery-title" data-en="Our Services" data-pt="Nossos Serviços" data-es="Nuestros Servicios"></div>
+	<div class="svc-grid">
+		<a href="https://booking.mangomint.com/667750?serviceId=hair" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">✂️</div>
+			<div class="svc-name" data-en="Hair & Color" data-pt="Cabelo & Cor" data-es="Cabello y Color"></div>
+			<div class="svc-detail" data-en="Styling, Balayage, Highlights" data-pt="Styling, Balayage, Mechas" data-es="Estilizado, Balayage, Mechas"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=extensions" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">✨</div>
+			<div class="svc-name" data-en="Extensions" data-pt="Extensões" data-es="Extensiones"></div>
+			<div class="svc-detail" data-en="Premium Hair Extensions" data-pt="Extensões de Cabelo Premium" data-es="Extensiones de Cabello Premium"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=kerastase" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">💧</div>
+			<div class="svc-name">Kérastase</div>
+			<div class="svc-detail" data-en="Luxury Hair Treatments" data-pt="Tratamentos Capilares de Luxo" data-es="Tratamientos Capilares de Lujo"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=nails" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">💅</div>
+			<div class="svc-name" data-en="Nails" data-pt="Unhas" data-es="Uñas"></div>
+			<div class="svc-detail" data-en="Manicure & Pedicure" data-pt="Manicure & Pedicure" data-es="Manicura y Pedicura"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=brows" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">👁️</div>
+			<div class="svc-name" data-en="Brows & Lashes" data-pt="Sobrancelhas & Cílios" data-es="Cejas y Pestañas"></div>
+			<div class="svc-detail" data-en="Lifting, Tinting, Extensions" data-pt="Lifting, Tintura, Extensões" data-es="Lifting, Tinte, Extensiones"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=makeup" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">💄</div>
+			<div class="svc-name" data-en="Makeup" data-pt="Maquiagem" data-es="Maquillaje"></div>
+			<div class="svc-detail" data-en="Professional Beauty" data-pt="Beleza Profissional" data-es="Belleza Profesional"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=waxing" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">🍯</div>
+			<div class="svc-name" data-en="Body Waxing" data-pt="Depilação" data-es="Depilación Corporal"></div>
+			<div class="svc-detail" data-en="Smooth Skin Care" data-pt="Cuidado da Pele" data-es="Cuidado Suave de la Piel"></div>
+		</a>
+		<a href="https://booking.mangomint.com/667750?serviceId=spa" target="_blank" rel="noopener" class="svc-item">
+			<div class="svc-icon">💆‍♀️</div>
+			<div class="svc-name" data-en="Massages & Facials" data-pt="Massagens & Faciais" data-es="Masajes y Faciales"></div>
+			<div class="svc-detail" data-en="Relaxation & Skincare" data-pt="Relaxamento & Skincare" data-es="Relajación y Skincare"></div>
+		</a>
+	</div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+<div class="gallery-title" data-en="Our Work" data-pt="Nosso Trabalho" data-es="Nuestro Trabajo"></div>
+<div class="gallery-wrapper">
+<div class="gallery-scroll" id="galleryScroll">
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80" alt="Hair Style" loading="lazy"><div class="gallery-caption" data-en="Hair & Color" data-pt="Cabelo & Cor" data-es="Cabello y Color"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=600&q=80" alt="Extensions" loading="lazy"><div class="gallery-caption" data-en="Extensions" data-pt="Extensões" data-es="Extensiones"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1620601399434-d1d80b5abcc3?auto=format&fit=crop&w=600&q=80" alt="Kerastase" loading="lazy"><div class="gallery-caption" data-en="Kérastase" data-pt="Kérastase" data-es="Kérastase"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80" alt="Nails" loading="lazy"><div class="gallery-caption" data-en="Nails" data-pt="Unhas" data-es="Uñas"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1588513706481-c775796cbfa1?auto=format&fit=crop&w=600&q=80" alt="Brows and Lashes" loading="lazy"><div class="gallery-caption" data-en="Brows & Lashes" data-pt="Sobrancelhas & Cílios" data-es="Cejas y Pestañas"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80" alt="Makeup" loading="lazy"><div class="gallery-caption" data-en="Makeup" data-pt="Maquiagem" data-es="Maquillaje"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80" alt="Body Waxing" loading="lazy"><div class="gallery-caption" data-en="Body Waxing" data-pt="Depilação" data-es="Depilación Corporal"></div></div>
+<div class="gallery-item"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" alt="Massages & Facials" loading="lazy"><div class="gallery-caption" data-en="Massages & Facials" data-pt="Massagens & Faciais" data-es="Masajes y Faciales"></div></div>
+</div>
+<div class="gallery-dots" id="galleryDots">
+<span class="active" onclick="snapGallery(0)"></span>
+<span onclick="snapGallery(1)"></span>
+<span onclick="snapGallery(2)"></span>
+<span onclick="snapGallery(3)"></span>
+<span onclick="snapGallery(4)"></span>
+<span onclick="snapGallery(5)"></span>
+<span onclick="snapGallery(6)"></span>
+<span onclick="snapGallery(7)"></span>
+</div>
+</div>
+</section>
+
+<!-- KERASTASE STRIP -->
+<div class="kerastase-strip">
+<div>
+<div class="ks-title">Kérastase & Shu Uemura</div>
+<div class="ks-text" data-en="Exclusive authorized salon — Premium hair care treatments" data-pt="Salão autorizado exclusivo — Tratamentos capilares premium" data-es="Salón autorizado exclusivo — Tratamientos capilares premium"></div>
+</div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+<div class="glass-card testimonial-card" id="testimonialCard">
+<div class="sec-sub" data-en="What Clients Say" data-pt="O Que Dizem Nossos Clientes" data-es="Lo Que Dicen Nuestros Clientes"></div>
+<div class="testimonial-quote" id="tQuote">"Absolutely the best salon experience in Miami. The team is incredibly talented and the atmosphere is luxurious."</div>
+<div class="testimonial-author" id="tAuthor">— Sarah M. ★★★★★</div>
+<div class="testimonial-dots" id="tDots">
+<span class="active" onclick="showTestimonial(0)"></span>
+<span onclick="showTestimonial(1)"></span>
+<span onclick="showTestimonial(2)"></span>
+</div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" style="padding-bottom: 2rem;">
+<a href="https://g.page/r/CblyiDU7hjArEBE/review" target="_blank" rel="noopener" style="text-decoration:none;display:block">
+<div class="glass-card" style="text-align:center;transition:all 0.3s;cursor:pointer" onmouseover="this.style.borderColor='var(--gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+<div class="sec-sub" data-en="Client Reviews" data-pt="Avaliações" data-es="Reseñas"></div>
+<div class="stars">★★★★★</div>
+<div style="display:flex;align-items:baseline;justify-content:center;gap:0.4rem">
+<span class="review-score">4.9</span>
+<span class="review-count" data-en="800+ reviews on Google" data-pt="800+ avaliações no Google" data-es="800+ reseñas en Google"></span>
+</div>
+<div class="review-btn" style="margin-top: 1.2rem;">
+<span data-en="⭐ Rate Us on Google" data-pt="⭐ Avalie-nos no Google" data-es="⭐ Califícanos en Google"></span>
+</div>
+</div>
+</a>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+<div class="glass-card">
+<div class="sec-sub" data-en="Our Services" data-pt="Nossos Serviços" data-es="Nuestros Servicios"></div>
+<div class="sec-title" data-en="Full-Service Premium Salon" data-pt="Salão Premium Completo" data-es="Salón Premium Completo"></div>
+<p class="sec-desc" data-en="45+ beauty services by 25+ professionals" data-pt="45+ serviços de beleza com 25+ profissionais" data-es="45+ servicios de belleza con 25+ profesionales"></p>
+<div class="svc-grid">
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=hair" target="_blank" rel="noopener"><span class="svc-icon">✂️</span><span class="svc-name" data-en="Hair" data-pt="Cabelo" data-es="Cabello"></span><span class="svc-detail" data-en="Cuts · Color · Extensions" data-pt="Cortes · Cor · Extensões" data-es="Cortes · Color · Extensiones"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=nails" target="_blank" rel="noopener"><span class="svc-icon">💅</span><span class="svc-name" data-en="Nails" data-pt="Unhas" data-es="Uñas"></span><span class="svc-detail" data-en="Manicure · Pedicure · Gel" data-pt="Manicure · Pedicure · Gel" data-es="Manicure · Pedicure · Gel"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=brows" target="_blank" rel="noopener"><span class="svc-icon">👁️</span><span class="svc-name" data-en="Brows & Lashes" data-pt="Sobrancelhas" data-es="Cejas y Pestañas"></span><span class="svc-detail" data-en="Extensions · Tinting · Lift" data-pt="Extensões · Tintura · Lift" data-es="Extensiones · Tinte · Lift"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=waxing" target="_blank" rel="noopener"><span class="svc-icon">🌿</span><span class="svc-name" data-en="Body Waxing" data-pt="Depilação" data-es="Depilación"></span><span class="svc-detail" data-en="Full Body · Brazilian" data-pt="Corpo Inteiro · Brasileira" data-es="Cuerpo Completo · Brasileña"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=spa" target="_blank" rel="noopener"><span class="svc-icon">✨</span><span class="svc-name" data-en="Facials" data-pt="Faciais" data-es="Faciales"></span><span class="svc-detail" data-en="Deep Clean · HydraFacial" data-pt="Limpeza · HydraFacial" data-es="Limpieza · HydraFacial"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=massage" target="_blank" rel="noopener"><span class="svc-icon">💆</span><span class="svc-name" data-en="Massages" data-pt="Massagens" data-es="Masajes"></span><span class="svc-detail" data-en="Relaxation · Deep Tissue" data-pt="Relaxante · Tecido Profundo" data-es="Relajante · Tejido Profundo"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=makeup" target="_blank" rel="noopener"><span class="svc-icon">💄</span><span class="svc-name" data-en="Make Up" data-pt="Maquiagem" data-es="Maquillaje"></span><span class="svc-detail" data-en="Bridal · Events · Glam" data-pt="Noiva · Eventos · Glam" data-es="Novia · Eventos · Glam"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=kerastase" target="_blank" rel="noopener"><span class="svc-icon">🧴</span><span class="svc-name">Kérastase</span><span class="svc-detail" data-en="& Shu Uemura Salon" data-pt="& Shu Uemura Salão" data-es="& Shu Uemura Salón"></span></a>
+<a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=podology" target="_blank" rel="noopener"><span class="svc-icon">🦶</span><span class="svc-name" data-en="Podology" data-pt="Podologia" data-es="Podología"></span><span class="svc-detail" data-en="Clinical Foot Care" data-pt="Cuidado Clínico" data-es="Cuidado Clínico"></span></a>
+</div>
+<a class="btn btn-book" href="https://booking.mangomint.com/667750" target="_blank" rel="noopener" style="margin-top:1.2rem;display:flex">
+<span data-en="📅 Book Any Service" data-pt="📅 Agendar Qualquer Serviço" data-es="📅 Agendar Cualquier Servicio"></span>
+</a>
+<a class="btn-prices" href="https://booking.mangomint.com/667750/services" target="_blank" rel="noopener">
+<span data-en="💰 View Prices" data-pt="💰 Ver Preços" data-es="💰 Ver Precios"></span>
+</a>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+<div class="glass-card">
+<div class="sec-sub" data-en="About Us" data-pt="Sobre Nós" data-es="Sobre Nosotros"></div>
+<div class="sec-title" data-en="Who We Are" data-pt="Quem Somos" data-es="Quiénes Somos"></div>
+<p class="about-text" data-en="High-quality beauty services that build your confidence and transform your looks are what you can expect at Studio-D Brickell. We are your premier high-end salon in Miami, FL. Whether you're looking for a fabulous hairstyle, eyelash extensions, Keratin treatment, or another personalized service — you've come to the right place." data-pt="Serviços de beleza de alta qualidade que constroem sua confiança e transformam seu visual é o que você pode esperar no Studio-D Brickell. Somos seu salão premium em Miami, FL. Seja um penteado fabuloso, extensões de cílios, tratamento de Keratina ou outro serviço personalizado — você veio ao lugar certo." data-es="Servicios de belleza de alta calidad que construyen tu confianza y transforman tu look es lo que puedes esperar en Studio-D Brickell. Somos tu salón premium en Miami, FL. Ya sea un peinado fabuloso, extensiones de pestañas, tratamiento de Keratina u otro servicio personalizado — has llegado al lugar indicado."></p>
+<div class="about-badge">
+<span>🏆</span>
+<span data-en="Proud Kérastase & Shu Uemura Exclusive Salon" data-pt="Salão Exclusivo Kérastase & Shu Uemura" data-es="Salón Exclusivo Kérastase & Shu Uemura"></span>
+</div>
+</div>
+</section>
+
+<!-- MEET THE TEAM -->
+<section class="section">
+<div class="glass-card">
+<div class="sec-sub" data-en="Meet the Team" data-pt="Conheça a Equipe" data-es="Conoce al Equipo"></div>
+<div class="sec-title" data-en="25+ Professionals" data-pt="25+ Profissionais" data-es="25+ Profesionales"></div>
+<div class="team-scroll">
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Julian-582x1024.jpeg') center top/cover;">
+<div class="team-name">Julian Payan</div>
+<div class="team-role">CEO & Co-Founder</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Dinho-624x1024.jpeg') center top/cover;">
+<div class="team-name">Dinho Payan</div>
+<div class="team-role">Owner & Ambassador</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Randolph-594x1024.jpeg') center top/cover;">
+<div class="team-name">Randolph</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Jo-589x1024.jpeg') center top/cover;">
+<div class="team-name">Jo</div>
+<div class="team-role">Front Desk</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Ana-Paula-624x1024.jpeg') center top/cover;">
+<div class="team-name">Ana Paula</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Andy-652x1024.jpeg') center top/cover;">
+<div class="team-name">Andy</div>
+<div class="team-role">Luxury Beauty Artist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Carolina-582x1024.jpeg') center top/cover;">
+<div class="team-name">Carolina</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Cris-563x1024.jpeg') center top/cover;">
+<div class="team-name">Cris</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Eva-706x1024.jpeg') center top/cover;">
+<div class="team-name">Eva</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Fidel-637x1024.jpeg') center top/cover;">
+<div class="team-name">Fidel</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Jussara-Midio-529x1024.jpeg') center top/cover;">
+<div class="team-name">Jussara Midio</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Kelly-684x1024.jpeg') center top/cover;">
+<div class="team-name">Kelly</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Layla-704x1024.jpeg') center top/cover;">
+<div class="team-name">Layla</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('https://www.studio-dbrickell.com/wp-content/uploads/2024/10/Zelia-669x1024.jpeg') center top/cover;">
+<div class="team-name">Zelia</div>
+<div class="team-role">Hair Stylist</div>
+</div>
+<div class="team-card" style="background: linear-gradient(135deg,#555,#333); align-items:center; justify-content:center;">
+<div style="font-size:2rem; color:#fff; margin-bottom:0.5rem">+</div>
+<div class="team-name" data-en="& Many More" data-pt="& Muito Mais" data-es="& Muchos Más"></div>
+<div class="team-role" data-en="View Full Team" data-pt="Ver Equipe" data-es="Ver Equipo"></div>
+</div>
+</div>
+<a class="btn-prices" href="https://booking.mangomint.com/667750" target="_blank" rel="noopener" style="margin-top:0.8rem">
+<span data-en="👥 Book with Team" data-pt="👥 Agendar com a Equipe" data-es="👥 Agendar con el Equipo"></span>
+</a>
+</div>
+</section>
+
+<!-- GIFT CARD -->
+<section class="section">
+<a class="glass-card web-link" href="https://clients.mangomint.com/gift-cards/667750" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:1rem;text-decoration:none;margin-bottom:0">
+<span style="font-size:1.5rem">🎁</span>
+<div>
+<div class="sec-sub" style="margin-bottom:0.2rem" data-en="Buy a Gift Card" data-pt="Comprar Vale-Presente" data-es="Comprar Tarjeta de Regalo"></div>
+<div style="font-size:0.8rem;color:var(--muted)" data-en="The perfect gift for someone special" data-pt="O presente perfeito" data-es="El regalo perfecto"></div>
+</div>
+<span style="margin-left:auto;color:var(--gold);font-size:1.2rem">→</span>
+</a>
+</section>
+
+<!-- SPECIALS & SHOP -->
+<section class="section">
+<div class="glass-card" style="text-align:center">
+<div class="sec-sub" data-en="Specials & Shop" data-pt="Promoções & Loja" data-es="Ofertas & Tienda"></div>
+<p class="promo-highlight" data-en="🎉 20% Off on purchases over $100 in our Online Store!" data-pt="🎉 20% de desconto em compras acima de $100 na Loja Online!" data-es="🎉 20% de descuento en compras de más de $100 en la Tienda Online!"></p>
+<div class="shop-btns">
+<a class="btn-shop" href="https://studio-dbrickell.shop/" target="_blank" rel="noopener">
+<span data-en="🛒 Shop Online" data-pt="🛒 Loja Online" data-es="🛒 Tienda Online"></span>
+</a>
+<a class="btn-shop" href="https://booking.mangomint.com/667750" target="_blank" rel="noopener">
+<span data-en="📅 Book Now" data-pt="📅 Agendar Agora" data-es="📅 Agendar Ahora"></span>
+</a>
+</div>
+</div>
+</section>
+
+<!-- HOURS -->
+<section class="section">
+<div class="glass-card">
+<div class="sec-sub" data-en="Hours" data-pt="Horários" data-es="Horarios"></div>
+<div id="openBadge" class="open-badge is-closed">
+<span class="open-dot"></span>
+<span id="openText" data-en="Closed" data-pt="Fechado" data-es="Cerrado"></span>
+</div>
+<div class="hours-grid">
+<div class="hours-row"><span class="hours-day" data-en="Sunday" data-pt="Domingo" data-es="Domingo"></span><span class="hours-time">10:00 AM – 5:00 PM</span></div>
+<div class="hours-row"><span class="hours-day" data-en="Monday" data-pt="Segunda" data-es="Lunes"></span><span class="hours-time">10:00 AM – 5:00 PM</span></div>
+<div class="hours-row"><span class="hours-day" data-en="Tuesday" data-pt="Terça" data-es="Martes"></span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+<div class="hours-row"><span class="hours-day" data-en="Wednesday" data-pt="Quarta" data-es="Miércoles"></span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+<div class="hours-row"><span class="hours-day" data-en="Thursday" data-pt="Quinta" data-es="Jueves"></span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+<div class="hours-row"><span class="hours-day" data-en="Friday" data-pt="Sexta" data-es="Viernes"></span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+<div class="hours-row"><span class="hours-day" data-en="Saturday" data-pt="Sábado" data-es="Sábado"></span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+</div>
+</div>
+</section>
+
+<!-- LOCATION -->
+<section class="section">
+<div class="glass-card">
+<div class="sec-sub" data-en="Location & Parking" data-pt="Localização e Estacionamento" data-es="Ubicación y Parqueo"></div>
+<div class="map-wrap">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.2!2d-80.1936!3d25.7617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6a4f4b3e7e7%3A0x2b30863b3588727b!2sStudio-D%20Brickell!5e0!3m2!1sen!2sus!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<div class="addr-text" style="margin-top:1rem;">900 S Miami Ave #266, Miami, FL 33130</div>
+<div class="addr-landmark" style="margin-bottom:1.5rem;" data-en="📍 2nd Floor · Mary Brickell Village<br>🚙 Valet & Garage Parking Available" data-pt="📍 2º Andar · Mary Brickell Village<br>🚙 Valet & Estacionamento Disponíveis" data-es="📍 2do Piso · Mary Brickell Village<br>🚙 Valet & Estacionamiento (Parqueo) Disponible"></div>
+
+<div style="display:flex; flex-direction:column; gap:0.6rem;">
+  <a class="btn-map" href="https://www.google.com/maps/dir//Studio-D+Brickell,+900+S+Miami+Ave+%23266,+Miami,+FL+33130" target="_blank" rel="noopener" style="margin-top:0; display:flex; justify-content:center; align-items:center; border-radius:8px;">
+    <span data-en="🧭 Get Directions" data-pt="🧭 Como Chegar" data-es="🧭 Obtener Dirección"></span>
+  </a>
+  <a class="btn-map" href="https://www.google.com/maps/search/parking+near+Studio-D+Brickell,+900+S+Miami+Ave,+Miami,+FL" target="_blank" rel="noopener" style="margin-top:0; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); display:flex; justify-content:center; align-items:center; border-radius:8px;">
+    <span data-en="🅿️ Find Parking Nearby" data-pt="🅿️ Encontrar Estacionamento" data-es="🅿️ Puntos de Parqueo"></span>
+  </a>
+</div>
+</div>
+</section>
+
+<!-- SOCIAL -->
+<section class="section">
+<div class="glass-card" style="text-align:center">
+<div class="sec-sub" data-en="Follow Us" data-pt="Siga-nos" data-es="Síguenos"></div>
+<div class="social-row">
+<a class="social-link" href="https://www.instagram.com/studiodmiami/" target="_blank" rel="noopener" aria-label="Instagram">
+<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+</a>
+<a class="social-link" href="https://www.facebook.com/StudioDMiami" target="_blank" rel="noopener" aria-label="Facebook">
+<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+</a>
+</div>
+</div>
+</section>
+
+<!-- PAYMENT METHODS -->
+<section class="section">
+<div class="glass-card" style="text-align:center">
+<div class="sec-sub" data-en="We Accept" data-pt="Aceitamos" data-es="Aceptamos"></div>
+<div class="pay-grid">
+<span class="pay-chip">💳 Visa</span>
+<span class="pay-chip">💳 MasterCard</span>
+<span class="pay-chip">💳 Amex</span>
+<span class="pay-chip">💳 Discover</span>
+<span class="pay-chip">💵 Cash</span>
+<span class="pay-chip"> Apple Pay</span>
+<span class="pay-chip"> Google Pay</span>
+<span class="pay-chip">📱 NFC</span>
+</div>
+</div>
+</section>
+
+<!-- KÉRASTASE PROMO -->
+<section class="section">
+<div class="promo-card">
+<div class="promo-badge" data-en="Exclusive Offer" data-pt="Oferta Exclusiva" data-es="Oferta Exclusiva"></div>
+<div class="promo-title" data-en="Free Kérastase Hydration Treatment" data-pt="Tratamento Kérastase Grátis" data-es="Tratamiento Kérastase Gratis"></div>
+<div class="promo-text" data-en="Enjoy a complimentary treatment with any Color, Balayage, or Extensions. Mention this ad when booking." data-pt="Aproveite um tratamento grátis com qualquer Coloração, Balayage ou Extensões. Mencione este anúncio." data-es="Disfruta de un tratamiento gratis con cualquier Color, Balayage o Extensiones. Menciona este anuncio."></div>
+<a class="promo-btn" href="https://booking.mangomint.com/667750" target="_blank" rel="noopener">
+<span data-en="Claim Offer →" data-pt="Resgatar Oferta →" data-es="Reclamar Oferta →"></span>
+</a>
+</div>
+</section>
+
+<!-- INFO SECTION -->
+<div class="info-section" style="padding: 2rem 0; text-align: center; border-top: 1px solid var(--border);">
+	<h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 1rem;">Visit Us</h3>
+	<p style="font-size: 0.85rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 500;">900 S Miami Ave #266, Miami, FL 33130</p>
+	<p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem;" data-en="Located on the Second Floor of Mary Brickell Village" data-es="Ubicado en el Segundo Piso de Mary Brickell Village" data-pt="Localizado no Segundo Andar de Mary Brickell Village"></p>
+	
+	<div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;">
+		<a href="tel:3053494969" style="padding: 0.6rem 1.2rem; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: all 0.3s;">
+			📞 (305) 349-4969
+		</a>
+	</div>
+
+	<div style="background: rgba(201,168,76,0.08); border-radius: 12px; padding: 1.2rem; margin-bottom: 1.5rem; border: 1px solid rgba(201,168,76,0.2);">
+		<h4 style="font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.8rem;" data-en="Parking Info" data-es="Información de Parqueo" data-pt="Informações de Estacionamento"></h4>
+		<p style="font-size: 0.8rem; color: var(--text); line-height: 1.5;" data-en="Valet & Garage Parking Available.<br>We Validate Garage Parking Only." data-es="Valet y Estacionamiento en Garaje Disponible.<br>Solo Validamos Estacionamiento en Garaje." data-pt="Valet e Estacionamento em Garagem Disponíveis.<br>Validamos Apenas Estacionamento em Garagem."></p>
+	</div>
+
+	<div style="text-align: left; background: rgba(255,255,255,0.6); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+		<h4 style="font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; text-align: center;" data-en="Hours of Operation" data-es="Horario de Atención" data-pt="Horário de Funcionamento"></h4>
+		<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8rem; color: var(--muted);">
+			<li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span data-en="Sunday - Monday" data-es="Domingo - Lunes" data-pt="Domingo - Segunda"></span> <span>10:00 AM - 5:00 PM</span></li>
+			<li style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text); font-weight: 500;"><span data-en="Tuesday - Saturday" data-es="Martes - Sábado" data-pt="Terça - Sábado"></span> <span>9:00 AM - 7:00 PM</span></li>
+		</ul>
+	</div>
+</div>
+
+<!-- PROMO NFC/YOURLEGACY -->
+<section style="padding: 2rem 1.5rem; text-align: center; margin-bottom: 2rem;">
+	<div style="background: linear-gradient(145deg, #111 0%, #000 100%); border: 1px solid rgba(184,134,11,0.5); border-radius: 24px; padding: 3rem 1.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+		<!-- Subtle glow -->
+		<div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(184,134,11,0.15) 0%, transparent 60%); z-index: 0; pointer-events: none; animation: pulse-fab 4s infinite"></div>
+		
+		<h4 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #FFF; margin-bottom: 0.8rem; position: relative; z-index: 1;" data-en="Elevate Your Brand" data-es="Eleva tu Marca" data-pt="Eleve sua Marca"></h4>
+		<p style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem; line-height: 1.6; position: relative; z-index: 1;" data-en="Get a premium Digital Hub and Smart NFC Cards like this one. Powered by YourLegacy Technology." data-es="Obtén un Digital Hub premium y Tarjetas Inteligentes NFC como este. Impulsado por Tecnología YourLegacy." data-pt="Tenha um Digital Hub premium e Cartões Inteligentes NFC como este. Desenvolvido por Tecnologia YourLegacy."></p>
+		
+		<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 2rem; position: relative; z-index: 1;">
+			<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(184,134,11,0.1)';" onmouseout="this.style.borderColor='rgba(184,134,11,0.2)';this.style.background='rgba(255,255,255,0.03)';">
+				<img src="assets/nfc-stack.webp" alt="NFC Card" style="width: 100%; height: auto; object-fit: contain; border-radius: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); max-height: 90px; margin-bottom: 0.5rem;">
+				<div style="font-size: 0.55rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Smart Cards</div>
+			</div>
+			<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(184,134,11,0.1)';" onmouseout="this.style.borderColor='rgba(184,134,11,0.2)';this.style.background='rgba(255,255,255,0.03)';">
+				<img src="assets/nfc-starter.webp" alt="NFC Tags" style="width: 100%; height: auto; object-fit: contain; border-radius: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); max-height: 90px; margin-bottom: 0.5rem;">
+				<div style="font-size: 0.55rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">NFC Tags</div>
+			</div>
+			<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(184,134,11,0.1)';" onmouseout="this.style.borderColor='rgba(184,134,11,0.2)';this.style.background='rgba(255,255,255,0.03)';">
+				<img src="assets/nfc-stand.webp" alt="Review Stands" style="width: 100%; height: auto; object-fit: contain; border-radius: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); max-height: 90px; margin-bottom: 0.5rem;">
+				<div style="font-size: 0.55rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Reviews</div>
+			</div>
+		</div>
+
+		<div style="display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 1;">
+			<a href="https://yourlegacy.tech" target="_blank" rel="noopener" style="background: linear-gradient(135deg,var(--gold) 0%,#EED48F 50%,#A68A3D 100%); color: #000; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; padding: 1rem 2rem; border-radius: 14px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 8px 25px rgba(184,134,11,0.4); text-decoration: none;">
+				<span data-en="Get Your NFC Card" data-es="Consigue tu Tarjeta NFC" data-pt="Peça seu Cartão NFC"></span>
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-logo">Copyright © 2025 Studio-D Brickell</div>
+<a class="footer-link" href="https://yourlegacy.tech" target="_blank" rel="noopener">Developed by YourLegacy Tech</a>
+</footer>
+
+</div><!-- /container -->
+
+<!-- WhatsApp FAB removed — chat FAB is the only floating button -->
+
+<!-- AI Chat FAB -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="AI Assistant" style="width: 70px; height: 70px; flex-direction: column; gap: 2px; border-radius: 50%;">
+	<div style="width: 28px; height: 28px; overflow: hidden; display: flex; justify-content: flex-start; align-items: center; filter: drop-shadow(0 0 5px rgba(255,215,0,0.5)); margin-top: 2px;">
+		<img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/LOGO-2.png" alt="Studio-D Logo" style="height: 28px; width: auto; max-width: none;">
+	</div>
+    <span style="font-size: 0.65rem; font-weight: 800; color: #000; letter-spacing: 1px; text-transform: uppercase;">Chat</span>
+</button>
+
+<!-- AI Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+<div class="chat-head" style="display: flex; align-items: center; justify-content: space-between;">
+<div style="display: flex; align-items: center; gap: 10px;">
+<img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/LOGO-2.png" alt="Logo" style="height: 24px; object-fit: contain; filter: drop-shadow(0 0 2px rgba(255,215,0,0.5));">
+<div>
+<div class="chat-head-name">Studio-D Concierge</div>
+<div class="chat-head-sub" data-en="AI Assistant · Ask me anything" data-pt="Assistente IA · Pergunte-me" data-es="Asistente IA · Pregúntame"></div>
+</div>
+</div>
+<button class="chat-close" onclick="toggleChat()">✕</button>
+</div>
+<div class="chat-body" id="chatBody"></div>
+<div class="chat-input-row" id="chatInputRow">
+<input class="chat-input" id="chatInput" placeholder="Ask about services, prices..." maxlength="300">
+<button class="chat-send" id="chatSend" onclick="sendChat()">→</button>
+</div>
+</div>
+
+<script>
+// Language system
+let currentLang = 'en';
+var langOrder = ['en','pt','es'];
+var langLabels = {en:'🌐 English', pt:'🌐 Português', es:'🌐 Español'};
+
+function detectLang() {
+  var saved = localStorage.getItem('studiod_lang');
+  if (saved) return saved;
+  var nav = (navigator.language || '').toLowerCase();
+  if (nav.startsWith('pt')) return 'pt';
+  if (nav.startsWith('es')) return 'es';
+  return 'en';
+}
+
+function cycleLang() {
+  var idx = langOrder.indexOf(currentLang);
+  var next = langOrder[(idx + 1) % langOrder.length];
+  setLang(next);
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('studiod_lang', lang);
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    var txt = el.getAttribute('data-' + lang);
+    if (txt) el.textContent = txt;
+  });
+  var btn = document.getElementById('langCycleBtn');
+  if (btn) btn.textContent = langLabels[lang] || langLabels.en;
+  // Update WhatsApp link text
+  var waLink = document.querySelector('.btn-wa');
+  if (waLink) {
+    var msgs = {
+      en: 'Hi%20Studio-D!%20I\'d%20like%20to%20book%20an%20appointment.',
+      pt: 'Olá%20Studio-D!%20Gostaria%20de%20agendar%20um%20horário.',
+      es: 'Hola%20Studio-D!%20Me%20gustaría%20agendar%20una%20cita.'
+    };
+    waLink.href = 'https://wa.me/13053494969?text=' + (msgs[lang] || msgs.en);
+  }
+  updateOpenStatus();
+}
+
+// Smart Hours
+function updateOpenStatus() {
+  var now = new Date();
+  // Convert to Miami time (ET)
+  var miami = new Date(now.toLocaleString('en-US', {timeZone: 'America/New_York'}));
+  var day = miami.getDay(); // 0=Sun
+  var h = miami.getHours();
+  var isOpen = false;
+  if (day === 0 || day === 1) {
+    isOpen = (h >= 10 && h < 17);
+  } else {
+    isOpen = (h >= 9 && h < 19);
+  }
+  var badge = document.getElementById('openBadge');
+  var text = document.getElementById('openText');
+  if (badge && text) {
+    badge.className = 'open-badge ' + (isOpen ? 'is-open' : 'is-closed');
+    var labels = {
+      en: isOpen ? 'Open Now' : 'Closed',
+      pt: isOpen ? 'Aberto Agora' : 'Fechado',
+      es: isOpen ? 'Abierto Ahora' : 'Cerrado'
+    };
+    text.textContent = labels[currentLang] || labels.en;
+  }
+}
+
+// Testimonials Carousel
+var testimonials = [
+  {quote: '"Absolutely the best salon experience in Miami. The team is incredibly talented and the atmosphere is luxurious."', author: '— Sarah M. ★★★★★'},
+  {quote: '"I\'ve been coming here for 3 years and Dinho always delivers perfection. The Kérastase treatments are divine!"', author: '— Carolina R. ★★★★★'},
+  {quote: '"From haircuts to nails, everything is top-notch. The staff makes you feel like family. Highly recommend!"', author: '— Maria L. ★★★★★'}
+];
+var tIdx = 0;
+function showTestimonial(i) {
+  tIdx = i;
+  var q = document.getElementById('tQuote');
+  var a = document.getElementById('tAuthor');
+  var dots = document.querySelectorAll('#tDots span');
+  if (q) q.textContent = testimonials[i].quote;
+  if (a) a.textContent = testimonials[i].author;
+  dots.forEach(function(d, j) { d.className = j === i ? 'active' : ''; });
+}
+setInterval(function() { showTestimonial((tIdx + 1) % testimonials.length); }, 5000);
+
+// Gallery Scroll Sync
+var galScroll = document.getElementById('galleryScroll');
+var galDots = document.querySelectorAll('#galleryDots span');
+if (galScroll && galDots.length > 0) {
+  galScroll.addEventListener('scroll', function() {
+    var scrollLeft = galScroll.scrollLeft;
+    var itemWidth = galScroll.clientWidth * 0.85 + 16; // 85% width + gap
+    var index = Math.round(scrollLeft / itemWidth);
+    if (index >= galDots.length) index = galDots.length - 1;
+    galDots.forEach(function(d, j) { d.className = j === index ? 'active' : ''; });
+  }, {passive: true});
+}
+
+function snapGallery(index) {
+  if (!galScroll) return;
+  var itemWidth = galScroll.clientWidth * 0.85 + 16;
+  galScroll.scrollTo({left: index * itemWidth, behavior: 'smooth'});
+}
+
+// Init
+setLang(detectLang());
+setInterval(updateOpenStatus, 60000);
+
+// === CANVAS 3D PARTICLE SYSTEM ===
+(function() {
+  var c = document.getElementById('bgCanvas');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var W, H, particles = [], mouseX = 0.5, mouseY = 0.5;
+
+  function resize() {
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Track mouse for parallax
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX / W;
+    mouseY = e.clientY / H;
+  });
+  document.addEventListener('touchmove', function(e) {
+    mouseX = e.touches[0].clientX / W;
+    mouseY = e.touches[0].clientY / H;
+  }, {passive: true});
+
+  // Create particles
+  for (var i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      z: Math.random() * 3 + 0.5, // depth
+      r: Math.random() * 2 + 0.5,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: -Math.random() * 0.4 - 0.1,
+      phase: Math.random() * Math.PI * 2,
+      gold: Math.random() > 0.3
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // Removed dark radial gradient bg to respect Light Luxury theme
+
+
+    var t = Date.now() * 0.001;
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      // Parallax from mouse
+      var px = (mouseX - 0.5) * 15 * p.z;
+      var py = (mouseY - 0.5) * 10 * p.z;
+      p.x += p.vx;
+      p.y += p.vy;
+      // Pulse
+      var pulse = Math.sin(t * 2 + p.phase) * 0.5 + 0.5;
+      var radius = p.r * (0.8 + pulse * 0.6) / p.z;
+      var alpha = (0.12 + pulse * 0.2) / p.z;
+      // Wrap
+      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+
+      var dx = p.x + px;
+      var dy = p.y + py;
+
+      ctx.beginPath();
+      if (p.gold) {
+        var gg = ctx.createRadialGradient(dx, dy, 0, dx, dy, radius * 4);
+        gg.addColorStop(0, 'rgba(201,168,76,' + alpha + ')');
+        gg.addColorStop(1, 'rgba(201,168,76,0)');
+        ctx.fillStyle = gg;
+      } else {
+        var gg2 = ctx.createRadialGradient(dx, dy, 0, dx, dy, radius * 3);
+        gg2.addColorStop(0, 'rgba(255,255,255,' + (alpha * 0.4) + ')');
+        gg2.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = gg2;
+      }
+      ctx.arc(dx, dy, radius * 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// === GALLERY AUTO-SCROLL ===
+(function() {
+  var gs = document.getElementById('galleryScroll');
+  if (gs) {
+    var dir = 1;
+    setInterval(function() {
+      var maxS = gs.scrollWidth - gs.clientWidth;
+      if (gs.scrollLeft >= maxS - 5) dir = -1;
+      if (gs.scrollLeft <= 5) dir = 1;
+      gs.scrollBy({left: dir * 210, behavior: 'smooth'});
+    }, 3500);
+  }
+})();
+
+// === SALON SLIDER AUTO-SCROLL ===
+(function() {
+  var track = document.getElementById('salonTrack');
+  if (!track) return;
+  var slides = track.children.length;
+  var idx = 0;
+  setInterval(function() {
+    idx = (idx + 1) % slides;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+  }, 4000);
+})();
+
+// === AI CHAT CONCIERGE (Gemini 2.0 Flash Lite) ===
+var GEMINI_KEY = 'YOUR_GEMINI_API_KEY'; // <-- INSERT YOUR KEY
+var chatMsgCount = 0;
+var chatHistory = [];
+var chatOpen = false;
+
+var SYSTEM_PROMPT = 'You are Studio-D Brickell\'s friendly virtual concierge. Answer in the same language the user writes in (English, Spanish, or Portuguese). Be concise (2-3 sentences max).\n\nStudio-D Brickell Info:\n- Premium full-service beauty salon, est. 2002\n- Location: 900 S Miami Ave #266, Miami FL 33130 (Mary Brickell Village, 2nd Floor)\n- Phone: (305) 349-4969\n- Hours: Sun-Mon 10AM-5PM, Tue-Sat 9AM-7PM\n- 25+ professionals, 45+ services\n- Founders: Julian Payan (CEO, 20+ yrs) & Dinho Payan (Owner/Stylist, 30+ yrs)\n- Exclusive Kérastase & Shu Uemura salon\n- Valet & Garage Parking Available (garage validated)\n\nServices & Price Ranges:\n- Hair: Cuts ($45-85), Color ($95-200), Highlights/Balayage ($150-350), Extensions ($300-800), Keratin ($200-400), Blowouts ($45-75)\n- Nails: Manicure ($25-45), Pedicure ($35-65), Gel ($35-55), Designs (+$10-25)\n- Brows & Lashes: Extensions ($150-250), Tinting ($35-50), Lift ($75-95), Lamination ($85)\n- Body Waxing: Brazilian ($55-85), Full Legs ($65), Arms ($35), Full Body ($150+)\n- Facials: HydraFacial ($150-250), Deep Cleansing ($85-120), Anti-aging ($120-200)\n- Massages: Relaxation ($85-120/60min), Deep Tissue ($120-180/60min)\n- Make Up: Events ($75-120), Bridal ($150-200), Glam ($100-150)\n- Podology: Clinical foot care ($50-85)\n\nBooking: https://booking.mangomint.com/667750\nPrices: https://booking.mangomint.com/667750/services\nGift Cards: https://clients.mangomint.com/gift-cards/667750\nOnline Shop (20% off over $100): https://studio-dbrickell.shop/\nInstagram: @studiodmiami\n\nKey team: Julian (CEO), Dinho (Hairstylist/Owner/Kérastase Ambassador), Randolph (Hairstylist 30yrs), Anisia Garcia (Color specialist 30yrs), Grisiela Ribeiro (Luxury Beauty Artist 25yrs), Jo (Front Desk), Liz/Gaby (Hair Associate), Eva (Nails), Zelia (Podology 30yrs), and many more.\n\nAlways encourage booking. If unsure about exact prices, suggest checking the booking page.';
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  var panel = document.getElementById('chatPanel');
+  var fab = document.getElementById('chatFab');
+  panel.classList.toggle('open', chatOpen);
+  fab.style.display = chatOpen ? 'none' : 'flex';
+  if (chatOpen && chatHistory.length === 0) {
+    var greetings = {
+      en: "Hi! ✨ I'm Studio-D's virtual concierge. Ask me about our services, prices, team, or hours. How can I help you today?",
+      pt: "Olá! ✨ Sou a concierge virtual do Studio-D. Pergunte sobre serviços, preços, equipe ou horários. Como posso ajudar?",
+      es: "¡Hola! ✨ Soy la concierge virtual de Studio-D. Pregúntame sobre servicios, precios, equipo u horarios. ¿En qué puedo ayudarte?"
+    };
+    addChatMsg('bot', greetings[currentLang] || greetings.en);
+  }
+}
+
+function addChatMsg(role, text) {
+  var body = document.getElementById('chatBody');
+  var div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function showCTAs() {
+  var body = document.getElementById('chatBody');
+  var div = document.createElement('div');
+  div.className = 'chat-msg cta';
+  var labels = {
+    en: {title: "You've used your free questions! Continue through:", wa: '💬 WhatsApp', review: '⭐ Leave a Review', call: '📞 Call Us'},
+    pt: {title: 'Suas perguntas gratuitas acabaram! Continue por:', wa: '💬 WhatsApp', review: '⭐ Deixe Avaliação', call: '📞 Ligar'},
+    es: {title: '¡Has usado tus preguntas gratuitas! Continúa por:', wa: '💬 WhatsApp', review: '⭐ Deja tu Reseña', call: '📞 Llámanos'}
+  };
+  var l = labels[currentLang] || labels.en;
+  div.innerHTML = '<div style="font-size:0.75rem;color:var(--gold);margin-bottom:0.5rem;font-weight:600">' + l.title + '</div>' +
+    '<a href="https://wa.me/13053494969" target="_blank" style="background:var(--wa);color:#fff;border-radius:6px">' + l.wa + '</a>' +
+    '<a href="https://g.page/r/CblyiDU7hjArEBE/review" target="_blank" style="background:rgba(255,193,7,0.2);color:#FFC107;border:1px solid rgba(255,193,7,0.3);border-radius:6px">' + l.review + '</a>' +
+    '<a href="tel:+13053494969" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:6px">' + l.call + '</a>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+  document.getElementById('chatInputRow').style.display = 'none';
+}
+
+async function sendChat() {
+  var input = document.getElementById('chatInput');
+  var msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  chatMsgCount++;
+  addChatMsg('user', msg);
+  chatHistory.push({role: 'user', parts: [{text: msg}]});
+
+  if (chatMsgCount > 3) { showCTAs(); return; }
+
+  var sendBtn = document.getElementById('chatSend');
+  sendBtn.disabled = true;
+  addChatMsg('bot', '...');
+
+  try {
+    var res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=' + GEMINI_KEY, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        system_instruction: {parts: [{text: SYSTEM_PROMPT}]},
+        contents: chatHistory,
+        generationConfig: {maxOutputTokens: 250, temperature: 0.7}
+      })
+    });
+    var data = await res.json();
+    var body = document.getElementById('chatBody');
+    body.removeChild(body.lastChild); // remove "..."
+    if (data.candidates && data.candidates[0]) {
+      var reply = data.candidates[0].content.parts[0].text;
+      chatHistory.push({role: 'model', parts: [{text: reply}]});
+      addChatMsg('bot', reply);
+    } else {
+      addChatMsg('bot', 'Sorry, I had an issue. Please call us at (305) 349-4969!');
+    }
+  } catch(e) {
+    var body2 = document.getElementById('chatBody');
+    body2.removeChild(body2.lastChild);
+    addChatMsg('bot', 'Connection error. Please try WhatsApp or call (305) 349-4969.');
+  }
+  sendBtn.disabled = false;
+  if (chatMsgCount >= 3) { showCTAs(); }
+}
+
+// Enter key for chat
+document.getElementById('chatInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') sendChat();
+});
+</script>
+</body>
+</html>

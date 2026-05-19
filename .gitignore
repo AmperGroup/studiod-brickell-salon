@@ -1,0 +1,12 @@
+# Development files
+fetch_team.js
+get_images.py
+raw.html
+team_images.txt
+team_images_detailed.json
+logo.png
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
