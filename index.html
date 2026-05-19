@@ -5,10 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Studio-D Brickell — Premium Hair Salon · Miami</title>
 <meta name="description" content="Studio-D Brickell — Full-service premium salon in Mary Brickell Village, Miami. 20+ years, 25+ professionals. Book your appointment today.">
-<meta name="theme-color" content="#0B0B0B">
+<meta name="theme-color" content="#FDFBF7">
 <meta property="og:title" content="Studio-D Brickell · Premium Salon">
 <meta property="og:description" content="Come as you are, leave at your best. Full-service premium salon in the heart of Brickell, Miami.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://www.studio-dbrickell.com">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:image" content="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/LOGO-2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Studio-D Brickell · Premium Salon">
+<meta name="twitter:description" content="Come as you are, leave at your best. Full-service premium salon in the heart of Brickell, Miami.">
+<meta name="twitter:image" content="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/LOGO-2.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/cropped-cropped-LOGO-2-1-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/cropped-cropped-LOGO-2-1-180x180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -134,8 +148,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .btn-book::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);transform:skewX(-20deg);animation:shimmerBtn 2.5s infinite}
 @keyframes shimmerBtn{0%{left:-100%}20%{left:200%}100%{left:200%}}
 .btn-book:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 30px rgba(201,168,76,0.6), inset 0 2px 5px rgba(255,255,255,0.5)}
-.btn-call{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px)}
-.btn-call:hover{background:rgba(255,255,255,0.1);border-color:var(--gold)}
+.btn-call{background:rgba(0,0,0,0.04);color:var(--text);border:1px solid rgba(0,0,0,0.12);backdrop-filter:blur(10px)}
+.btn-call:hover{background:rgba(201,168,76,0.08);border-color:var(--gold)}
 .btn-wa{background:rgba(37,211,102,0.15);color:#1A994A;border:1px solid rgba(37,211,102,0.4)}
 .btn-wa:hover{background:rgba(37,211,102,0.25);border-color:#1A994A}
 .btn-email{background:rgba(234,67,53,0.15);color:#C33025;border:1px solid rgba(234,67,53,0.4)}
@@ -226,6 +240,39 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .footer-logo{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
 .footer-link{font-size:0.65rem;color:var(--gold);text-decoration:none}
 .footer-link:hover{text-decoration:underline}
+
+/* INFO SECTION */
+.info-section{padding:2rem 1.5rem;text-align:center;border-top:1px solid var(--border)}
+
+/* === MOBILE OPTIMIZATIONS === */
+@media(max-width:480px){
+  .container{max-width:100%;padding:0}
+  .hero-banner{height:50vh;min-height:360px;max-height:520px}
+  .salon-slider{height:200px}
+  .gallery-item{flex:0 0 82%;height:360px}
+  .chat-panel{width:calc(100vw - 24px);right:12px;bottom:12px;height:420px;max-height:70vh}
+  .chat-fab{bottom:16px;right:12px;width:62px;height:62px}
+  .svc-grid{grid-template-columns:1fr 1fr;gap:0.5rem;padding:0}
+  .team-card{flex:0 0 130px;height:170px}
+  .kerastase-strip{margin:0 1rem 1.2rem}
+  .promo-card{margin:0}
+  .info-section{padding:1.5rem 1rem}
+}
+@media(max-width:360px){
+  .hero-banner{height:45vh;min-height:300px}
+  .gallery-item{flex:0 0 90%;height:320px}
+  .svc-grid{grid-template-columns:1fr 1fr;gap:0.4rem}
+  .svc-name{font-size:0.7rem}
+  .svc-detail{font-size:0.55rem}
+  .btn-book{font-size:0.85rem;min-height:48px}
+  .team-card{flex:0 0 120px;height:160px}
+}
+/* Safe area padding for notched phones */
+@supports(padding-bottom: env(safe-area-inset-bottom)){
+  .chat-fab{bottom:calc(16px + env(safe-area-inset-bottom))}
+  .chat-panel{bottom:calc(12px + env(safe-area-inset-bottom))}
+  .footer{padding-bottom:calc(2rem + env(safe-area-inset-bottom))}
+}
 </style>
 </head>
 <body>
@@ -283,81 +330,36 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 	<div class="salon-slider">
 		<div class="salon-track" id="salonTrack">
 			<div class="salon-slide">
-				<img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Salon Interior" loading="lazy">
+				<img src="https://www.studio-dbrickell.com/wp-content/uploads/2023/01/untitled-6065-scaled.jpg" alt="Salon Interior" loading="lazy">
 				<div class="salon-overlay-text" data-en="Luxurious Atmosphere" data-es="Atmósfera Lujosa" data-pt="Atmosfera Luxuosa"></div>
 			</div>
 			<div class="salon-slide">
-				<img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=800&q=80" alt="Salon Experience" loading="lazy">
+				<img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/shutterstock_1935834610-1024x642.jpg" alt="Salon Experience" loading="lazy">
 				<div class="salon-overlay-text" data-en="20+ Years of Excellence" data-es="20+ Años de Excelencia" data-pt="20+ Anos de Excelência"></div>
 			</div>
 			<div class="salon-slide">
-				<img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80" alt="Premium Service" loading="lazy">
+				<img src="https://www.studio-dbrickell.com/wp-content/uploads/2023/04/PHOTO-2022-02-28-12-33-06-9-copy.jpg" alt="Premium Service" loading="lazy">
 				<div class="salon-overlay-text" data-en="Premium Quality Service" data-es="Servicio de Calidad Premium" data-pt="Serviço de Qualidade Premium"></div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- SERVICES -->
-<section style="margin-bottom: 2rem;">
-	<div class="gallery-title" data-en="Our Services" data-pt="Nossos Serviços" data-es="Nuestros Servicios"></div>
-	<div class="svc-grid">
-		<a href="https://booking.mangomint.com/667750?serviceId=hair" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">✂️</div>
-			<div class="svc-name" data-en="Hair & Color" data-pt="Cabelo & Cor" data-es="Cabello y Color"></div>
-			<div class="svc-detail" data-en="Styling, Balayage, Highlights" data-pt="Styling, Balayage, Mechas" data-es="Estilizado, Balayage, Mechas"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=extensions" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">✨</div>
-			<div class="svc-name" data-en="Extensions" data-pt="Extensões" data-es="Extensiones"></div>
-			<div class="svc-detail" data-en="Premium Hair Extensions" data-pt="Extensões de Cabelo Premium" data-es="Extensiones de Cabello Premium"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=kerastase" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">💧</div>
-			<div class="svc-name">Kérastase</div>
-			<div class="svc-detail" data-en="Luxury Hair Treatments" data-pt="Tratamentos Capilares de Luxo" data-es="Tratamientos Capilares de Lujo"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=nails" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">💅</div>
-			<div class="svc-name" data-en="Nails" data-pt="Unhas" data-es="Uñas"></div>
-			<div class="svc-detail" data-en="Manicure & Pedicure" data-pt="Manicure & Pedicure" data-es="Manicura y Pedicura"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=brows" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">👁️</div>
-			<div class="svc-name" data-en="Brows & Lashes" data-pt="Sobrancelhas & Cílios" data-es="Cejas y Pestañas"></div>
-			<div class="svc-detail" data-en="Lifting, Tinting, Extensions" data-pt="Lifting, Tintura, Extensões" data-es="Lifting, Tinte, Extensiones"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=makeup" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">💄</div>
-			<div class="svc-name" data-en="Makeup" data-pt="Maquiagem" data-es="Maquillaje"></div>
-			<div class="svc-detail" data-en="Professional Beauty" data-pt="Beleza Profissional" data-es="Belleza Profesional"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=waxing" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">🍯</div>
-			<div class="svc-name" data-en="Body Waxing" data-pt="Depilação" data-es="Depilación Corporal"></div>
-			<div class="svc-detail" data-en="Smooth Skin Care" data-pt="Cuidado da Pele" data-es="Cuidado Suave de la Piel"></div>
-		</a>
-		<a href="https://booking.mangomint.com/667750?serviceId=spa" target="_blank" rel="noopener" class="svc-item">
-			<div class="svc-icon">💆‍♀️</div>
-			<div class="svc-name" data-en="Massages & Facials" data-pt="Massagens & Faciais" data-es="Masajes y Faciales"></div>
-			<div class="svc-detail" data-en="Relaxation & Skincare" data-pt="Relaxamento & Skincare" data-es="Relajación y Skincare"></div>
-		</a>
-	</div>
-</section>
+
 
 <!-- GALLERY -->
 <section class="gallery">
 <div class="gallery-title" data-en="Our Work" data-pt="Nosso Trabalho" data-es="Nuestro Trabajo"></div>
 <div class="gallery-wrapper">
 <div class="gallery-scroll" id="galleryScroll">
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80" alt="Hair Style" loading="lazy"><div class="gallery-caption" data-en="Hair & Color" data-pt="Cabelo & Cor" data-es="Cabello y Color"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=600&q=80" alt="Extensions" loading="lazy"><div class="gallery-caption" data-en="Extensions" data-pt="Extensões" data-es="Extensiones"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80" alt="Kerastase" loading="lazy"><div class="gallery-caption" data-en="Kérastase" data-pt="Kérastase" data-es="Kérastase"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80" alt="Nails" loading="lazy"><div class="gallery-caption" data-en="Nails" data-pt="Unhas" data-es="Uñas"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=600&q=80" alt="Brows and Lashes" loading="lazy"><div class="gallery-caption" data-en="Brows & Lashes" data-pt="Sobrancelhas & Cílios" data-es="Cejas y Pestañas"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80" alt="Makeup" loading="lazy"><div class="gallery-caption" data-en="Makeup" data-pt="Maquiagem" data-es="Maquillaje"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80" alt="Body Waxing" loading="lazy"><div class="gallery-caption" data-en="Body Waxing" data-pt="Depilação" data-es="Depilación Corporal"></div></div>
-<div class="gallery-item"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" alt="Massages & Facials" loading="lazy"><div class="gallery-caption" data-en="Massages & Facials" data-pt="Massagens & Faciais" data-es="Masajes y Faciales"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/11-1-675x1024.jpg" alt="Hair Style" loading="lazy"><div class="gallery-caption" data-en="Hair & Color" data-pt="Cabelo & Cor" data-es="Cabello y Color"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2023/04/untitled-6038-copy-684x1024.jpg" alt="Extensions" loading="lazy"><div class="gallery-caption" data-en="Extensions" data-pt="Extensões" data-es="Extensiones"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2024/05/kerastase-premiere-repairing-hair-care-set-for-fine-to-medium-damaged-hair-1024x1024-1.webp" alt="Kérastase" loading="lazy"><div class="gallery-caption" data-en="Kérastase" data-pt="Kérastase" data-es="Kérastase"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/23-675x1024.jpg" alt="Nails" loading="lazy"><div class="gallery-caption" data-en="Nails" data-pt="Unhas" data-es="Uñas"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/shutterstock_1718089249-1-scaled-e1671468412400-566x1024.jpg" alt="Brows and Lashes" loading="lazy"><div class="gallery-caption" data-en="Brows & Lashes" data-pt="Sobrancelhas & Cílios" data-es="Cejas y Pestañas"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/shutterstock_602484704-683x1024.jpg" alt="Makeup" loading="lazy"><div class="gallery-caption" data-en="Makeup" data-pt="Maquiagem" data-es="Maquillaje"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/shutterstock_1793036203-862x1024.jpg" alt="Body Waxing" loading="lazy"><div class="gallery-caption" data-en="Body Waxing" data-pt="Depilação" data-es="Depilación Corporal"></div></div>
+<div class="gallery-item"><img src="https://www.studio-dbrickell.com/wp-content/uploads/2022/12/shutterstock_1838162326.jpg" alt="Massages & Facials" loading="lazy"><div class="gallery-caption" data-en="Massages & Facials" data-pt="Massagens & Faciais" data-es="Masajes y Faciales"></div></div>
 </div>
 <div class="gallery-dots" id="galleryDots">
 <span class="active" onclick="snapGallery(0)"></span>
@@ -638,8 +640,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </section>
 
 <!-- INFO SECTION -->
-<div class="info-section" style="padding: 2rem 0; text-align: center; border-top: 1px solid var(--border);">
-	<h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 1rem;">Visit Us</h3>
+<div class="info-section">
+	<h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 1rem;" data-en="Visit Us" data-es="Visítanos" data-pt="Visite-nos"></h3>
 	<p style="font-size: 0.85rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 500;">900 S Miami Ave #266, Miami, FL 33130</p>
 	<p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem;" data-en="Located on the Second Floor of Mary Brickell Village" data-es="Ubicado en el Segundo Piso de Mary Brickell Village" data-pt="Localizado no Segundo Andar de Mary Brickell Village"></p>
 	
@@ -688,7 +690,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 		</div>
 
 		<div style="display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 1;">
-			<a href="https://yourlegacy.tech" target="_blank" rel="noopener" style="background: linear-gradient(135deg,var(--gold) 0%,#EED48F 50%,#A68A3D 100%); color: #000; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; padding: 1rem 2rem; border-radius: 14px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 8px 25px rgba(184,134,11,0.4); text-decoration: none;">
+			<a href="https://www.yourlegacy.tech/nfc" target="_blank" rel="noopener" style="background: linear-gradient(135deg,var(--gold) 0%,#EED48F 50%,#A68A3D 100%); color: #000; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; padding: 1rem 2rem; border-radius: 14px; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 8px 25px rgba(184,134,11,0.4); text-decoration: none;">
 				<span data-en="Get Your NFC Card" data-es="Consigue tu Tarjeta NFC" data-pt="Peça seu Cartão NFC"></span>
 			</a>
 		</div>
@@ -697,7 +699,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
 <!-- FOOTER -->
 <footer class="footer">
-<div class="footer-logo">Copyright © 2025 Studio-D Brickell</div>
+<div class="footer-logo">Copyright © 2026 Studio-D Brickell</div>
 <a class="footer-link" href="https://yourlegacy.tech" target="_blank" rel="noopener">Developed by YourLegacy Tech</a>
 </footer>
 
@@ -727,7 +729,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </div>
 <div class="chat-body" id="chatBody"></div>
 <div class="chat-input-row" id="chatInputRow">
-<input class="chat-input" id="chatInput" placeholder="Ask about services, prices..." maxlength="300">
+<input class="chat-input" id="chatInput" placeholder="Ask about services, prices..." maxlength="300" enterkeyhint="send">
 <button class="chat-send" id="chatSend" onclick="sendChat()">→</button>
 </div>
 </div>
@@ -775,7 +777,25 @@ function setLang(lang) {
     };
     waLink.href = 'https://wa.me/13053494969?text=' + (msgs[lang] || msgs.en);
   }
+  // Update chat language (placeholder, greeting, and input)
+  updateChatLanguage(lang);
   updateOpenStatus();
+}
+
+function updateChatLanguage(lang) {
+  var placeholders = {en: 'Ask about services, prices...', pt: 'Pergunte sobre serviços, preços...', es: 'Pregunta sobre servicios, precios...'};
+  var chatInput = document.getElementById('chatInput');
+  if (chatInput) chatInput.placeholder = placeholders[lang] || placeholders.en;
+  // If chat is open and only has the initial greeting, update it
+  var chatBody = document.getElementById('chatBody');
+  if (chatBody && chatBody.children.length === 1 && chatHistory.length === 0) {
+    var greetings = {
+      en: "Hi! ✨ I'm Studio-D's virtual concierge. Ask me about our services, prices, team, or hours. How can I help you today?",
+      pt: "Olá! ✨ Sou a concierge virtual do Studio-D. Pergunte sobre serviços, preços, equipe ou horários. Como posso ajudar?",
+      es: "¡Hola! ✨ Soy la concierge virtual de Studio-D. Pregúntame sobre servicios, precios, equipo u horarios. ¿En qué puedo ayudarte?"
+    };
+    chatBody.children[0].textContent = greetings[lang] || greetings.en;
+  }
 }
 
 // Smart Hours
@@ -959,6 +979,7 @@ var GEMINI_KEY = 'YOUR_GEMINI_API_KEY'; // <-- INSERT YOUR KEY
 var chatMsgCount = 0;
 var chatHistory = [];
 var chatOpen = false;
+var chatGreetingShown = false;
 
 var SYSTEM_PROMPT = 'You are Studio-D Brickell\'s friendly virtual concierge. Answer in the same language the user writes in (English, Spanish, or Portuguese). Be concise (2-3 sentences max).\n\nStudio-D Brickell Info:\n- Premium full-service beauty salon, est. 2002\n- Location: 900 S Miami Ave #266, Miami FL 33130 (Mary Brickell Village, 2nd Floor)\n- Phone: (305) 349-4969\n- Hours: Sun-Mon 10AM-5PM, Tue-Sat 9AM-7PM\n- 25+ professionals, 45+ services\n- Founders: Julian Payan (CEO, 20+ yrs) & Dinho Payan (Owner/Stylist, 30+ yrs)\n- Exclusive Kérastase & Shu Uemura salon\n- Valet & Garage Parking Available (garage validated)\n\nServices & Price Ranges:\n- Hair: Cuts ($45-85), Color ($95-200), Highlights/Balayage ($150-350), Extensions ($300-800), Keratin ($200-400), Blowouts ($45-75)\n- Nails: Manicure ($25-45), Pedicure ($35-65), Gel ($35-55), Designs (+$10-25)\n- Brows & Lashes: Extensions ($150-250), Tinting ($35-50), Lift ($75-95), Lamination ($85)\n- Body Waxing: Brazilian ($55-85), Full Legs ($65), Arms ($35), Full Body ($150+)\n- Facials: HydraFacial ($150-250), Deep Cleansing ($85-120), Anti-aging ($120-200)\n- Massages: Relaxation ($85-120/60min), Deep Tissue ($120-180/60min)\n- Make Up: Events ($75-120), Bridal ($150-200), Glam ($100-150)\n- Podology: Clinical foot care ($50-85)\n\nBooking: https://booking.mangomint.com/667750\nPrices: https://booking.mangomint.com/667750/services\nGift Cards: https://clients.mangomint.com/gift-cards/667750\nOnline Shop (20% off over $100): https://studio-dbrickell.shop/\nInstagram: @studiodmiami\n\nKey team: Julian (CEO), Dinho (Hairstylist/Owner/Kérastase Ambassador), Randolph (Hairstylist 30yrs), Anisia Garcia (Color specialist 30yrs), Grisiela Ribeiro (Luxury Beauty Artist 25yrs), Jo (Front Desk), Liz/Gaby (Hair Associate), Eva (Nails), Zelia (Podology 30yrs), and many more.\n\nAlways encourage booking. If unsure about exact prices, suggest checking the booking page.';
 
@@ -968,7 +989,8 @@ function toggleChat() {
   var fab = document.getElementById('chatFab');
   panel.classList.toggle('open', chatOpen);
   fab.style.display = chatOpen ? 'none' : 'flex';
-  if (chatOpen && chatHistory.length === 0) {
+  if (chatOpen && !chatGreetingShown) {
+    chatGreetingShown = true;
     var greetings = {
       en: "Hi! ✨ I'm Studio-D's virtual concierge. Ask me about our services, prices, team, or hours. How can I help you today?",
       pt: "Olá! ✨ Sou a concierge virtual do Studio-D. Pergunte sobre serviços, preços, equipe ou horários. Como posso ajudar?",
@@ -1039,12 +1061,14 @@ async function sendChat() {
       chatHistory.push({role: 'model', parts: [{text: reply}]});
       addChatMsg('bot', reply);
     } else {
-      addChatMsg('bot', 'Sorry, I had an issue. Please call us at (305) 349-4969!');
+      var errMsgs = {en:'Sorry, I had an issue. Please call us at (305) 349-4969!',pt:'Desculpe, tive um problema. Ligue para (305) 349-4969!',es:'Lo siento, tuve un problema. Llámanos al (305) 349-4969!'};
+      addChatMsg('bot', errMsgs[currentLang] || errMsgs.en);
     }
   } catch(e) {
     var body2 = document.getElementById('chatBody');
     body2.removeChild(body2.lastChild);
-    addChatMsg('bot', 'Connection error. Please try WhatsApp or call (305) 349-4969.');
+    var connMsgs = {en:'Connection error. Please try WhatsApp or call (305) 349-4969.',pt:'Erro de conexão. Tente WhatsApp ou ligue (305) 349-4969.',es:'Error de conexión. Intenta WhatsApp o llama al (305) 349-4969.'};
+    addChatMsg('bot', connMsgs[currentLang] || connMsgs.en);
   }
   sendBtn.disabled = false;
   if (chatMsgCount >= 3) { showCTAs(); }
