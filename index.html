@@ -758,7 +758,10 @@ function setLang(lang) {
   localStorage.setItem('studiod_lang', lang);
   document.querySelectorAll('[data-en]').forEach(function(el) {
     var txt = el.getAttribute('data-' + lang);
-    if (txt) el.textContent = txt;
+    if (txt) {
+      if (txt.indexOf('<') !== -1) { el.innerHTML = txt; }
+      else { el.textContent = txt; }
+    }
   });
   var btn = document.getElementById('langCycleBtn');
   if (btn) btn.textContent = langLabels[lang] || langLabels.en;
