@@ -90,7 +90,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
 
 /* CHAT AI */
-.chat-fab{position:fixed;bottom:24px;right:16px;z-index:200;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);border:none;cursor:pointer;box-shadow:0 4px 20px var(--gold-glow);display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:transform 0.3s;animation:pulse-fab 2s infinite}
+.chat-fab{position:fixed;bottom:24px;right:16px;z-index:200;width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);border:none;cursor:pointer;box-shadow:0 4px 20px var(--gold-glow);display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;font-size:1.6rem;transition:transform 0.3s;animation:pulse-fab 2s infinite}
 @keyframes pulse-fab{0%,100%{box-shadow:0 4px 20px var(--gold-glow)}50%{box-shadow:0 4px 30px rgba(201,168,76,0.6)}}
 .chat-fab:hover{transform:scale(1.1)}
 .chat-panel{position:fixed;bottom:24px;right:16px;z-index:201;width:340px;max-width:calc(100vw - 32px);height:440px;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
@@ -708,7 +708,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 <!-- WhatsApp FAB removed — chat FAB is the only floating button -->
 
 <!-- AI Chat FAB -->
-<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="AI Assistant" style="width: 70px; height: 70px; flex-direction: column; gap: 2px; border-radius: 50%;">
+<button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="AI Assistant">
 	<div style="width: 28px; height: 28px; overflow: hidden; display: flex; justify-content: flex-start; align-items: center; filter: drop-shadow(0 0 5px rgba(255,215,0,0.5)); margin-top: 2px;">
 		<img src="assets/downloaded/LOGO-2.png" alt="Studio-D Logo" style="height: 28px; width: auto; max-width: none;">
 	</div>
@@ -867,7 +867,8 @@ var galDots = document.querySelectorAll('#galleryDots span');
 if (galScroll && galDots.length > 0) {
   galScroll.addEventListener('scroll', function() {
     var scrollLeft = galScroll.scrollLeft;
-    var itemWidth = galScroll.clientWidth * 0.85 + 16; // 85% width + gap
+    var item = galScroll.querySelector('.gallery-item');
+    var itemWidth = item ? item.offsetWidth + 16 : galScroll.clientWidth * 0.85 + 16;
     var index = Math.round(scrollLeft / itemWidth);
     if (index >= galDots.length) index = galDots.length - 1;
     galDots.forEach(function(d, j) { d.className = j === index ? 'active' : ''; });
@@ -876,7 +877,8 @@ if (galScroll && galDots.length > 0) {
 
 function snapGallery(index) {
   if (!galScroll) return;
-  var itemWidth = galScroll.clientWidth * 0.85 + 16;
+  var item = galScroll.querySelector('.gallery-item');
+  var itemWidth = item ? item.offsetWidth + 16 : galScroll.clientWidth * 0.85 + 16;
   galScroll.scrollTo({left: index * itemWidth, behavior: 'smooth'});
 }
 
