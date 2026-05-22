@@ -1003,6 +1003,121 @@ var chatGreetingShown = false;
 
 var SYSTEM_PROMPT = 'You are Studio-D Brickell\'s friendly virtual concierge. Answer in the same language the user writes in (English, Spanish, or Portuguese). Be concise (2-3 sentences max).\n\nStudio-D Brickell Info:\n- Premium full-service beauty salon, est. 2002\n- Location: 900 S Miami Ave #266, Miami FL 33130 (Mary Brickell Village, 2nd Floor)\n- Phone: (305) 349-4969\n- Hours: Sun-Mon 10AM-5PM, Tue-Sat 9AM-7PM\n- 25+ professionals, 45+ services\n- Founders: Julian Payan (CEO, 20+ yrs) & Dinho Payan (Owner/Stylist, 30+ yrs)\n- Exclusive Kérastase & Shu Uemura salon\n- Valet & Garage Parking Available (garage validated)\n\nServices & Price Ranges:\n- Hair: Cuts ($45-85), Color ($95-200), Highlights/Balayage ($150-350), Extensions ($300-800), Keratin ($200-400), Blowouts ($45-75)\n- Nails: Manicure ($25-45), Pedicure ($35-65), Gel ($35-55), Designs (+$10-25)\n- Brows & Lashes: Extensions ($150-250), Tinting ($35-50), Lift ($75-95), Lamination ($85)\n- Body Waxing: Brazilian ($55-85), Full Legs ($65), Arms ($35), Full Body ($150+)\n- Facials: HydraFacial ($150-250), Deep Cleansing ($85-120), Anti-aging ($120-200)\n- Massages: Relaxation ($85-120/60min), Deep Tissue ($120-180/60min)\n- Make Up: Events ($75-120), Bridal ($150-200), Glam ($100-150)\n- Podology: Clinical foot care ($50-85)\n\nBooking: https://booking.mangomint.com/667750\nPrices: https://booking.mangomint.com/667750/services\nGift Cards: https://clients.mangomint.com/gift-cards/667750\nOnline Shop (20% off over $100): https://studio-dbrickell.shop/\nInstagram: @studiodmiami\n\nKey team: Julian (CEO), Dinho (Hairstylist/Owner/Kérastase Ambassador), Randolph (Hairstylist 30yrs), Anisia Garcia (Color specialist 30yrs), Grisiela Ribeiro (Luxury Beauty Artist 25yrs), Jo (Front Desk), Liz/Gaby (Hair Associate), Eva (Nails), Zelia (Podology 30yrs), and many more.\n\nAlways encourage booking. If unsure about exact prices, suggest checking the booking page.';
 
+function getLocalFallbackResponse(userMsg, lang) {
+  var msg = userMsg.toLowerCase().trim();
+  var responses = {
+    en: {
+      greeting: "Hello! ✨ I'm Studio-D's virtual assistant. I can answer questions about our services, prices, team, hours, and parking. How can I help you?",
+      hair: "We offer cuts ($45-85), blowouts ($45-75), color ($95-200), highlights/balayage ($150-350), keratin ($200-400), and extensions ($300-800) using premium Kérastase products. You can book here: https://booking.mangomint.com/667750",
+      nails: "Our nail services include manicure ($25-45), pedicure ($35-65), gel ($35-55), and custom designs (+$10-25). Book your spot: https://booking.mangomint.com/667750",
+      brows: "For brows & lashes, we offer extensions ($150-250), tinting ($35-50), lifts ($75-95), and lamination ($85). Book here: https://booking.mangomint.com/667750",
+      waxing: "We provide professional body waxing: Brazilian ($55-85), full legs ($65), arms ($35), and full body ($150+). Book online: https://booking.mangomint.com/667750",
+      facials: "Our facial treatments include HydraFacial ($150-250), deep cleansing ($85-120), and anti-aging treatments ($120-200). Book here: https://booking.mangomint.com/667750",
+      massage: "Relax with our massages: Relaxation ($85-120 for 60min) or Deep Tissue ($120-180 for 60min). Book now: https://booking.mangomint.com/667750",
+      makeup: "We do makeup for events ($75-120), bridal ($150-200), and glam ($100-150). Book here: https://booking.mangomint.com/667750",
+      podology: "We offer professional clinical foot care/podology ($50-85) by specialists like Zelia (30+ yrs experience). Book here: https://booking.mangomint.com/667750",
+      prices: "You can find all our services and detailed prices on our booking page: https://booking.mangomint.com/667750/services",
+      location: "We are located at 900 S Miami Ave #266, Miami, FL 33130, on the 2nd Floor of Mary Brickell Village. Call us at (305) 349-4969.",
+      hours: "Our hours are Sunday to Monday 10:00 AM – 5:00 PM, and Tuesday to Saturday 9:00 AM – 7:00 PM.",
+      parking: "Valet and garage parking are available at Mary Brickell Village. We validate garage parking only.",
+      products: "We are an exclusive Kérastase & Shu Uemura salon. You can purchase premium products with 20% off (on orders >$100) at our online shop: https://studio-dbrickell.shop/",
+      team: "Our team includes founders Julian Payan (CEO) & Dinho Payan (Ambassador/Stylist), alongside expert stylists like Randolph, Ana Paula, Jussara, and others. You can choose your professional when booking: https://booking.mangomint.com/667750",
+      booking: "You can easily schedule your appointment online here: https://booking.mangomint.com/667750 or contact us via WhatsApp.",
+      unknown: "I'd love to help you with that! For specific requests, detailed pricing, or custom appointments, please check our Booking Page (https://booking.mangomint.com/667750) or call us directly at (305) 349-4969."
+    },
+    es: {
+      greeting: "¡Hola! ✨ Soy la asistente virtual de Studio-D. Puedo responder tus dudas sobre servicios, precios, equipo, horarios y estacionamiento. ¿En qué puedo ayudarte?",
+      hair: "Ofrecemos cortes ($45-85), peinados ($45-75), color ($95-200), mechas/balayage ($150-350), queratina ($200-400) y extensiones ($300-800) usando productos Kérastase. Reserva aquí: https://booking.mangomint.com/667750",
+      nails: "Nuestros servicios de uñas incluyen manicura ($25-45), pedicura ($35-65), gel ($35-55) y diseños personalizados (+$10-25). Reserva aquí: https://booking.mangomint.com/667750",
+      brows: "Para cejas y pestañas, ofrecemos extensiones ($150-250), tinte ($35-50), liftings ($75-95) y laminación ($85). Reserva tu cita: https://booking.mangomint.com/667750",
+      waxing: "Ofrecemos depilación profesional con cera: brasileña ($55-85), piernas completas ($65), brazos ($35) y cuerpo completo ($150+). Reserva aquí: https://booking.mangomint.com/667750",
+      facials: "Nuestros tratamientos faciales incluyen HydraFacial ($150-250), limpieza profunda ($85-120) y tratamientos antienvejecimiento ($120-200). Agenda aquí: https://booking.mangomint.com/667750",
+      massage: "Relájate con nuestros masajes: de Relajación ($85-120 por 60min) o Tejido Profundo ($120-180 por 60min). Reserva hoy: https://booking.mangomint.com/667750",
+      makeup: "Realizamos maquillaje para eventos ($75-120), novias ($150-200) y glam ($100-150). Reserva aquí: https://booking.mangomint.com/667750",
+      podology: "Ofrecemos podología y cuidado clínico del pie ($50-85) con especialistas como Zelia (30+ años de experiencia). Reserva aquí: https://booking.mangomint.com/667750",
+      prices: "Puedes ver todos nuestros servicios y sus precios detallados en la página de reservas: https://booking.mangomint.com/667750/services",
+      location: "Estamos ubicados en 900 S Miami Ave #266, Miami, FL 33130, en el segundo piso de Mary Brickell Village. Teléfono: (305) 349-4969.",
+      hours: "Nuestro horario es de domingo a lunes de 10:00 AM a 5:00 PM, y de martes a sábado de 9:00 AM a 7:00 PM.",
+      parking: "Valet y estacionamiento en garaje disponibles en Mary Brickell Village. Validamos únicamente el estacionamiento en el garaje.",
+      products: "Somos un salón autorizado exclusivo de Kérastase y Shu Uemura. Compra productos premium con 20% de descuento (en compras >$100) aquí: https://studio-dbrickell.shop/",
+      team: "Nuestro equipo está liderado por Julian Payan (CEO) y Dinho Payan (Estilista/Embajador), junto a expertos como Randolph, Ana Paula, Jussara y más. Elige tu especialista aquí: https://booking.mangomint.com/667750",
+      booking: "Puedes agendar tu cita de forma rápida y sencilla en línea en: https://booking.mangomint.com/667750",
+      unknown: "¡Me encantaría ayudarte! Para consultas específicas, precios detallados o citas personalizadas, por favor visita nuestra página de reservas (https://booking.mangomint.com/667750) o llámanos directamente al (305) 349-4969."
+    },
+    pt: {
+      greeting: "Olá! ✨ Sou a concierge virtual do Studio-D. Posso responder sobre serviços, preços, equipe, horários e estacionamento. Como posso te ajudar hoje?",
+      hair: "Oferecemos cortes ($45-85), escovas ($45-75), coloração ($95-200), mechas/balayage ($150-350), queratina ($200-400) e extensões ($300-800) com produtos Kérastase. Agende aqui: https://booking.mangomint.com/667750",
+      nails: "Nossos serviços de unhas incluem manicure ($25-45), pedicure ($35-65), gel ($35-55) e artes personalizadas (+$10-25). Agende seu horário: https://booking.mangomint.com/667750",
+      brows: "Para sobrancelhas e cílios, temos extensões ($150-250), tintura ($35-50), lash lift ($75-95) e laminação ($85). Agende aqui: https://booking.mangomint.com/667750",
+      waxing: "Oferecemos depilação profissional: brasileira ($55-85), pernas inteiras ($65), braços ($35) e corpo inteiro ($150+). Agende online: https://booking.mangomint.com/667750",
+      facials: "Nossos tratamentos faciais incluem HydraFacial ($150-250), limpeza de pele profunda ($85-120) e tratamentos anti-idade ($120-200). Agende aqui: https://booking.mangomint.com/667750",
+      massage: "Relaxe com nossas massagens: Relaxante ($85-120 por 60min) ou Tecido Profundo ($120-180 por 60min). Agende agora: https://booking.mangomint.com/667750",
+      makeup: "Fazemos maquiagem para eventos ($75-120), noivas ($150-200) e glam ($100-150). Agende aqui: https://booking.mangomint.com/667750",
+      podology: "Oferecemos podologia e cuidado clínico dos pés ($50-85) com especialistas como Zelia (30+ anos de experiência). Agende aqui: https://booking.mangomint.com/667750",
+      prices: "Você pode ver todos os serviços e preços detalhados na nossa página de agendamentos: https://booking.mangomint.com/667750/services",
+      location: "Estamos localizados na 900 S Miami Ave #266, Miami, FL 33130, no 2º andar do Mary Brickell Village. Ligue para (305) 349-4969.",
+      hours: "Nosso horário é de domingo a segunda das 10h às 17h, e de terça a sábado das 9h às 19h.",
+      parking: "Valet e estacionamento rotativo disponíveis no Mary Brickell Village. Validamos apenas o estacionamento na garagem.",
+      products: "Somos um salão exclusivo Kérastase & Shu Uemura. Compre produtos premium com 20% de desconto (pedidos >$100) na nossa loja: https://studio-dbrickell.shop/",
+      team: "Nossa equipe é liderada por Julian Payan (CEO) e Dinho Payan (Ambassador/Stylist), com Randolph, Ana Paula, Jussara e outros. Escolha seu profissional: https://booking.mangomint.com/667750",
+      booking: "Você pode agendar facilmente o seu horário online em: https://booking.mangomint.com/667750",
+      unknown: "Eu adoraria te ajudar com isso! Para dúvidas específicas, detalhes de preços ou agendamentos personalizados, consulte nossa página de reservas (https://booking.mangomint.com/667750) ou ligue para (305) 349-4969."
+    }
+  };
+
+  var r = responses[lang] || responses.en;
+
+  if (msg.includes("corte") || msg.includes("cabello") || msg.includes("pelo") || msg.includes("color") || msg.includes("balayage") || msg.includes("mecha") || msg.includes("peinado") || msg.includes("hair") || msg.includes("cut") || msg.includes("style") || msg.includes("keratin") || msg.includes("queratina") || msg.includes("blowout") || msg.includes("escova") || msg.includes("exten")) {
+    return r.hair;
+  }
+  if (msg.includes("uña") || msg.includes("manicur") || msg.includes("pedicur") || msg.includes("nail") || msg.includes("gel") || msg.includes("unha")) {
+    return r.nails;
+  }
+  if (msg.includes("ceja") || msg.includes("pestaña") || msg.includes("brow") || msg.includes("lash") || msg.includes("sobrancelha") || msg.includes("cílio") || msg.includes("lift") || msg.includes("lamina")) {
+    return r.brows;
+  }
+  if (msg.includes("depila") || msg.includes("cera") || msg.includes("wax") || msg.includes("brazilian") || msg.includes("pierna") || msg.includes("leg")) {
+    return r.waxing;
+  }
+  if (msg.includes("facial") || msg.includes("limpieza") || msg.includes("clean") || msg.includes("hydrafacial") || msg.includes("pele") || msg.includes("anti-aging")) {
+    return r.facials;
+  }
+  if (msg.includes("masaje") || msg.includes("massage") || msg.includes("relax") || msg.includes("tissue") || msg.includes("profundo") || msg.includes("dor")) {
+    return r.massage;
+  }
+  if (msg.includes("maquillaje") || msg.includes("makeup") || msg.includes("make up") || msg.includes("maquiagem") || msg.includes("novia") || msg.includes("bridal") || msg.includes("noiva")) {
+    return r.makeup;
+  }
+  if (msg.includes("podolog") || msg.includes("pie") || msg.includes("foot") || msg.includes("feet") || msg.includes("pé") || msg.includes("zelia")) {
+    return r.podology;
+  }
+  if (msg.includes("precio") || msg.includes("cost") || msg.includes("cuesta") || msg.includes("valor") || msg.includes("cuánto") || msg.includes("price") || msg.includes("preço") || msg.includes("quanto")) {
+    return r.prices;
+  }
+  if (msg.includes("direc") || msg.includes("ubic") || msg.includes("donde") || msg.includes("dónde") || msg.includes("address") || msg.includes("location") || msg.includes("where") || msg.includes("onde") || msg.includes("mapa") || msg.includes("map")) {
+    return r.location;
+  }
+  if (msg.includes("horario") || msg.includes("hora") || msg.includes("abierto") || msg.includes("cerrado") || msg.includes("abre") || msg.includes("cierra") || msg.includes("hour") || msg.includes("open") || msg.includes("close") || msg.includes("time")) {
+    return r.hours;
+  }
+  if (msg.includes("parqueo") || msg.includes("estaciona") || msg.includes("garaje") || msg.includes("parking") || msg.includes("valet") || msg.includes("garage") || msg.includes("carro") || msg.includes("auto")) {
+    return r.parking;
+  }
+  if (msg.includes("producto") || msg.includes("shampoo") || msg.includes("product") || msg.includes("kerastase") || msg.includes("shu uemura") || msg.includes("tienda") || msg.includes("shop") || msg.includes("loja") || msg.includes("compra")) {
+    return r.products;
+  }
+  if (msg.includes("equipo") || msg.includes("team") || msg.includes("estilista") || msg.includes("stylist") || msg.includes("dinho") || msg.includes("julian") || msg.includes("randolph") || msg.includes("jo") || msg.includes("profesional")) {
+    return r.team;
+  }
+  if (msg.includes("cita") || msg.includes("reserva") || msg.includes("agendar") || msg.includes("turno") || msg.includes("book") || msg.includes("appoint")) {
+    return r.booking;
+  }
+  if (msg.includes("hola") || msg.includes("hello") || msg.includes("hi") || msg.includes("bom dia") || msg.includes("boa tarde") || msg.includes("oi") || msg.includes("hey")) {
+    return r.greeting;
+  }
+  return r.unknown;
+}
+
 function toggleChat() {
   chatOpen = !chatOpen;
   var panel = document.getElementById('chatPanel');
@@ -1057,7 +1172,21 @@ async function sendChat() {
   addChatMsg('user', msg);
   chatHistory.push({role: 'user', parts: [{text: msg}]});
 
-  if (chatMsgCount > 3) { showCTAs(); return; }
+  if (chatMsgCount >= 3) {
+    var reply = getLocalFallbackResponse(msg, currentLang);
+    chatHistory.push({role: 'model', parts: [{text: reply}]});
+    addChatMsg('bot', reply);
+
+    var redirectMsgs = {
+      en: "To keep our service running smoothly, you will now be redirected to our booking portal to schedule your appointment.",
+      es: "Para no saturar el sistema, te redirigimos automáticamente a nuestro portal oficial de reservas para agendar tu cita.",
+      pt: "Para não sobrecarregar o sistema, estamos te redirecionando ao nosso portal oficial de agendamentos para marcar seu horário."
+    };
+    addChatMsg('bot', redirectMsgs[currentLang] || redirectMsgs.en);
+    window.open('https://booking.mangomint.com/667750', '_blank');
+    showCTAs();
+    return;
+  }
 
   var sendBtn = document.getElementById('chatSend');
   sendBtn.disabled = true;
@@ -1073,25 +1202,36 @@ async function sendChat() {
         generationConfig: {maxOutputTokens: 250, temperature: 0.7}
       })
     });
-    var data = await res.json();
+    
+    var reply = "";
     var body = document.getElementById('chatBody');
-    body.removeChild(body.lastChild); // remove "..."
-    if (data.candidates && data.candidates[0]) {
-      var reply = data.candidates[0].content.parts[0].text;
-      chatHistory.push({role: 'model', parts: [{text: reply}]});
-      addChatMsg('bot', reply);
-    } else {
-      var errMsgs = {en:'Sorry, I had an issue. Please call us at (305) 349-4969!',pt:'Desculpe, tive um problema. Ligue para (305) 349-4969!',es:'Lo siento, tuve un problema. Llámanos al (305) 349-4969!'};
-      addChatMsg('bot', errMsgs[currentLang] || errMsgs.en);
+    if (body.lastChild && body.lastChild.textContent === '...') {
+      body.removeChild(body.lastChild); // remove "..."
     }
+
+    if (res.ok) {
+      var data = await res.json();
+      if (data.candidates && data.candidates[0]) {
+        reply = data.candidates[0].content.parts[0].text;
+      }
+    }
+
+    if (!reply) {
+      reply = getLocalFallbackResponse(msg, currentLang);
+    }
+
+    chatHistory.push({role: 'model', parts: [{text: reply}]});
+    addChatMsg('bot', reply);
   } catch(e) {
     var body2 = document.getElementById('chatBody');
-    body2.removeChild(body2.lastChild);
-    var connMsgs = {en:'Connection error. Please try WhatsApp or call (305) 349-4969.',pt:'Erro de conexão. Tente WhatsApp ou ligue (305) 349-4969.',es:'Error de conexión. Intenta WhatsApp o llama al (305) 349-4969.'};
-    addChatMsg('bot', connMsgs[currentLang] || connMsgs.en);
+    if (body2.lastChild && body2.lastChild.textContent === '...') {
+      body2.removeChild(body2.lastChild);
+    }
+    var reply = getLocalFallbackResponse(msg, currentLang);
+    chatHistory.push({role: 'model', parts: [{text: reply}]});
+    addChatMsg('bot', reply);
   }
   sendBtn.disabled = false;
-  if (chatMsgCount >= 3) { showCTAs(); }
 }
 
 // Enter key for chat
