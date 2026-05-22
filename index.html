@@ -111,6 +111,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .chat-input:focus{border-color:var(--gold)}
 .chat-send{background:var(--gold);border:none;border-radius:8px;padding:0.5rem 0.8rem;color:#000;font-weight:700;cursor:pointer;font-size:0.8rem}
 .chat-send:disabled{opacity:0.4;cursor:not-allowed}
+.chat-msg-actions{display:flex;flex-direction:column;gap:6px;margin:2px 0 8px 0;width:85%;align-self:flex-start;animation:fadeUp 0.3s}
+.chat-link{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border-radius:12px;border:none;color:#fff!important;font-size:0.75rem;font-weight:700;text-decoration:none;transition:all 0.25s ease;cursor:pointer;width:100%;box-sizing:border-box;box-shadow:0 3px 10px rgba(0,0,0,0.1);text-align:center;font-family:'Roboto',sans-serif}
+.chat-link:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0,0,0,0.15)}
+.chat-link:active{transform:translateY(0);box-shadow:0 2px 5px rgba(0,0,0,0.1)}
+.chat-link-booking{background:linear-gradient(135deg,#FFD700,#B8860B);text-shadow:0 1px 2px rgba(0,0,0,0.3)}
+.chat-link-booking:hover{background:linear-gradient(135deg,#FFE44D,#CD9B1D)}
+.chat-link-wa{background:linear-gradient(135deg,#25D366,#128C7E);text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.chat-link-wa:hover{background:linear-gradient(135deg,#34E073,#159F90)}
+.chat-link-shop{background:linear-gradient(135deg,#EC4899,#8B5CF6);text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.chat-link-shop:hover{background:linear-gradient(135deg,#F472B6,#A78BFA)}
+.chat-link-default{background:linear-gradient(135deg,#C9A84C,#8B6914);text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.chat-link-default:hover{background:linear-gradient(135deg,#D9B85C,#9B7924)}
+.chat-link-scroll{background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.3);color:var(--gold)!important;text-shadow:none;box-shadow:none}
+.chat-link-scroll:hover{background:rgba(184,134,11,0.18);border-color:var(--gold)}
 
 /* BEAUTY SPOTLIGHT & SPARKLE EFFECTS */
 @keyframes spotlight{0%{opacity:0.4;transform:translateX(-30%)}50%{opacity:0.7}100%{opacity:0.4;transform:translateX(30%)}}
@@ -250,7 +264,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   .hero-banner{height:50vh;min-height:360px;max-height:520px}
   .salon-slider{height:200px}
   .gallery-item{flex:0 0 82%;height:360px}
-  .chat-panel{width:calc(100vw - 24px);right:12px;bottom:12px;height:420px;max-height:70vh}
+  .chat-panel{width:100%;max-width:100%;right:0;bottom:0!important;height:65vh;max-height:75vh;border-radius:20px 20px 0 0;border-bottom:none;border-left:none;border-right:none}
+  .chat-input-row{padding-bottom:calc(0.6rem + env(safe-area-inset-bottom, 0px))}
   .chat-fab{bottom:16px;right:12px;width:62px;height:62px}
   .svc-grid{grid-template-columns:1fr 1fr;gap:0.5rem;padding:0}
   .team-card{flex:0 0 130px;height:170px}
@@ -414,7 +429,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </section>
 
 <!-- SERVICES -->
-<section class="section">
+<section class="section" id="services-section">
 <div class="glass-card">
 <div class="sec-sub" data-en="Our Services" data-pt="Nossos Serviços" data-es="Nuestros Servicios"></div>
 <div class="sec-title" data-en="Full-Service Premium Salon" data-pt="Salão Premium Completo" data-es="Salón Premium Completo"></div>
@@ -453,7 +468,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </section>
 
 <!-- MEET THE TEAM -->
-<section class="section">
+<section class="section" id="team-section">
 <div class="glass-card">
 <div class="sec-sub" data-en="Meet the Team" data-pt="Conheça a Equipe" data-es="Conoce al Equipo"></div>
 <div class="sec-title" data-en="25+ Professionals" data-pt="25+ Profissionais" data-es="25+ Profesionales"></div>
@@ -555,7 +570,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </section>
 
 <!-- HOURS -->
-<section class="section">
+<section class="section" id="hours-section">
 <div class="glass-card">
 <div class="sec-sub" data-en="Hours" data-pt="Horários" data-es="Horarios"></div>
 <div id="openBadge" class="open-badge is-closed">
@@ -575,7 +590,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 </section>
 
 <!-- LOCATION -->
-<section class="section">
+<section class="section" id="location-section">
 <div class="glass-card">
 <div class="sec-sub" data-en="Location & Parking" data-pt="Localização e Estacionamento" data-es="Ubicación y Parqueo"></div>
 <div class="map-wrap">
@@ -1135,12 +1150,143 @@ function toggleChat() {
   }
 }
 
+function openLinkSafely(url) {
+  if (!url) return;
+  var win = window.open(url, '_blank');
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    window.location.href = url;
+  }
+}
+
+function scrollToSection(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.style.outline = '2px solid var(--gold)';
+    el.style.outlineOffset = '4px';
+    el.style.borderRadius = '4px';
+    setTimeout(function() {
+      el.style.outline = 'none';
+    }, 2000);
+    if (window.innerWidth <= 480) {
+      toggleChat();
+    }
+  }
+}
+
 function addChatMsg(role, text) {
   var body = document.getElementById('chatBody');
   var div = document.createElement('div');
   div.className = 'chat-msg ' + role;
-  div.textContent = text;
-  body.appendChild(div);
+  
+  if (role === 'bot') {
+    // 1. Extract URLs before cleaning
+    var urlRegex = /(https?:\/\/[^\s,;()]+)/g;
+    var urls = text.match(urlRegex) || [];
+    
+    // 2. Clean the text (remove prepositions and URLs, fix punctuation)
+    var cleanText = text
+      .replace(/(?::\s*|\s*-\s*|\s+)?(?:en\s+|a\s+|at\s+|in\s+)?https?:\/\/[^\s,;()]+/gi, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s*,\s*,/g, ',')
+      .replace(/\s*,\s*\./g, '.')
+      .replace(/\s*,\s*o\s+/gi, ' o ')
+      .replace(/\s*,\s*or\s+/gi, ' or ')
+      .replace(/\s*,\s*ou\s+/gi, ' ou ')
+      .trim();
+      
+    if (cleanText && /[a-zA-Z0-9]$/.test(cleanText) && !cleanText.endsWith('...')) {
+      cleanText += '.';
+    }
+    
+    // 3. Escape clean text for safety
+    var escaped = cleanText
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+      
+    div.innerHTML = escaped;
+    body.appendChild(div);
+    
+    // 4. Render Action Buttons container if URLs exist
+    if (urls.length > 0) {
+      var actionContainer = document.createElement('div');
+      actionContainer.className = 'chat-msg-actions';
+      
+      urls.forEach(function(url) {
+        var btn = document.createElement('button');
+        btn.className = 'chat-link';
+        
+        var label = "Visitar";
+        if (url.includes("booking")) {
+          btn.classList.add('chat-link-booking');
+          label = "📅 Reservar Cita / Book Now";
+        } else if (url.includes("wa.me")) {
+          btn.classList.add('chat-link-wa');
+          label = "💬 WhatsApp Chat";
+        } else if (url.includes("shop")) {
+          btn.classList.add('chat-link-shop');
+          label = "🛒 Tienda Online / Shop";
+        } else {
+          btn.classList.add('chat-link-default');
+          label = "🔗 Visitar Enlace";
+        }
+        
+        btn.textContent = label;
+        btn.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          openLinkSafely(url);
+        };
+        actionContainer.appendChild(btn);
+      });
+      body.appendChild(actionContainer);
+    }
+    
+    // 5. Render Scroll Buttons if matching local keywords
+    var lowerText = text.toLowerCase();
+    var scrollContainer = null;
+    
+    function addScrollButton(sectionId, btnLabel) {
+      if (!scrollContainer) {
+        scrollContainer = document.createElement('div');
+        scrollContainer.className = 'chat-msg-actions';
+      }
+      var sBtn = document.createElement('button');
+      sBtn.className = 'chat-link chat-link-scroll';
+      sBtn.innerHTML = btnLabel;
+      sBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        scrollToSection(sectionId);
+      };
+      scrollContainer.appendChild(sBtn);
+    }
+    
+    if (lowerText.includes("corte") || lowerText.includes("cabello") || lowerText.includes("pelo") || lowerText.includes("color") || lowerText.includes("balayage") || lowerText.includes("uña") || lowerText.includes("ceja") || lowerText.includes("depila") || lowerText.includes("facial") || lowerText.includes("masaje") || lowerText.includes("maquillaje") || lowerText.includes("podolog") || lowerText.includes("service") || lowerText.includes("servicio") || lowerText.includes("serviço")) {
+      addScrollButton('services-section', '📍 Ver Servicios / View Services');
+    }
+    if (lowerText.includes("equipo") || lowerText.includes("team") || lowerText.includes("estilista") || lowerText.includes("dinho") || lowerText.includes("julian") || lowerText.includes("randolph")) {
+      addScrollButton('team-section', '📍 Ver Equipo / View Team');
+    }
+    if (lowerText.includes("direc") || lowerText.includes("ubic") || lowerText.includes("donde") || lowerText.includes("mapa") || lowerText.includes("parqueo") || lowerText.includes("estaciona") || lowerText.includes("location") || lowerText.includes("address") || lowerText.includes("onde")) {
+      addScrollButton('location-section', '📍 Ver Mapa y Parqueo / View Map');
+    }
+    if (lowerText.includes("horario") || lowerText.includes("hora") || lowerText.includes("abierto") || lowerText.includes("cerrado") || lowerText.includes("abre") || lowerText.includes("hour")) {
+      addScrollButton('hours-section', '📍 Ver Horarios / View Hours');
+    }
+    
+    if (scrollContainer && scrollContainer.children.length > 0) {
+      body.appendChild(scrollContainer);
+    }
+    
+  } else {
+    div.textContent = text;
+    body.appendChild(div);
+  }
+  
   body.scrollTop = body.scrollHeight;
 }
 
