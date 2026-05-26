@@ -1399,11 +1399,15 @@ async function sendChat() {
   addTypingIndicator();
 
   try {
+    var dynamicPrompt = SYSTEM_PROMPT + '\n\nIMPORTANT: The user\'s current language is ' + 
+      (currentLang === 'es' ? 'Spanish' : currentLang === 'pt' ? 'Portuguese' : 'English') + 
+      '. You MUST write your response in this language.';
+
     var res = await fetch('/api/chat', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        system_instruction: {parts: [{text: SYSTEM_PROMPT}]},
+        system_instruction: {parts: [{text: dynamicPrompt}]},
         contents: chatHistory,
         generationConfig: {maxOutputTokens: 250, temperature: 0.7}
       })
