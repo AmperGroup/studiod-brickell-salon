@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Studio-D Brickell — Premium Hair Salon · Miami</title>
 <meta name="description" content="Studio-D Brickell — Full-service premium salon in Mary Brickell Village, Miami. 20+ years, 25+ professionals. Book your appointment today.">
 <meta name="theme-color" content="#FDFBF7">
@@ -29,6 +29,7 @@
 <style>
 :root{--bg:#FFFFFF;--surface:#F8F8F8;--border:rgba(184,134,11,0.2);--text:#1A1A1A;--muted:#666666;--gold:#B8860B;--gold-glow:rgba(184,134,11,0.3);--glass:rgba(255,255,255,0.9);--accent:rgba(184,134,11,0.05);--wa:#25D366;--blue:#0024F8}
 *{margin:0;padding:0;box-sizing:border-box}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Roboto',sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 a,button{-webkit-tap-highlight-color:transparent;text-decoration:none}
@@ -90,16 +91,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 
 
 /* CHAT AI */
-.chat-fab{position:fixed;bottom:24px;right:16px;z-index:200;width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);border:none;cursor:pointer;box-shadow:0 4px 20px var(--gold-glow);display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;font-size:1.6rem;transition:transform 0.3s;animation:pulse-fab 2s infinite}
+.chat-fab{position:fixed;bottom:24px;right:16px;z-index:200;width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);border:none;cursor:pointer;box-shadow:0 4px 20px var(--gold-glow);display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;font-size:1.6rem;transition:transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s;animation:pulse-fab 2s infinite;visibility:visible;opacity:1}
 @keyframes pulse-fab{0%,100%{box-shadow:0 4px 20px var(--gold-glow)}50%{box-shadow:0 4px 30px rgba(201,168,76,0.6)}}
 .chat-fab:hover{transform:scale(1.1)}
-.chat-panel{position:fixed;bottom:24px;right:16px;z-index:201;width:340px;max-width:calc(100vw - 32px);height:440px;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
-.chat-panel.open{display:flex}
+.chat-fab.hidden{transform:scale(0);opacity:0;visibility:hidden;pointer-events:none}
+.chat-panel{position:fixed;bottom:24px;right:16px;z-index:201;width:340px;max-width:calc(100vw - 32px);height:440px;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(20px) scale(0.95);transition:transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s}
+.chat-panel.open{opacity:1;visibility:visible;pointer-events:all;transform:translateY(0) scale(1)}
 .chat-head{padding:0.8rem 1rem;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(255,255,255,0.9));border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem}
 .chat-head-name{font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:600;color:var(--text)}
 .chat-head-sub{font-size:0.6rem;color:var(--gold)}
 .chat-close{margin-left:auto;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer}
-.chat-body{flex:1;overflow-y:auto;padding:0.8rem;display:flex;flex-direction:column;gap:0.6rem}
+.chat-body{flex:1;overflow-y:auto;padding:0.8rem;display:flex;flex-direction:column;gap:0.6rem;overscroll-behavior:contain}
 .chat-msg{max-width:85%;padding:0.6rem 0.8rem;border-radius:12px;font-size:0.8rem;line-height:1.4;animation:fadeUp 0.3s}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .chat-msg.bot{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.2);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
@@ -107,7 +109,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .chat-msg.cta{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);padding:0.8rem;text-align:center}
 .chat-msg.cta a{display:inline-block;margin:0.3rem;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.75rem;font-weight:600;text-decoration:none;transition:all 0.3s}
 .chat-input-row{display:flex;gap:0.4rem;padding:0.6rem;border-top:1px solid var(--border);background:rgba(255,255,255,0.8)}
-.chat-input{flex:1;background:rgba(0,0,0,0.04);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.7rem;color:var(--text);font-size:0.8rem;font-family:'Roboto',sans-serif;outline:none}
+.chat-input{flex:1;background:rgba(0,0,0,0.04);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.7rem;color:var(--text);font-size:0.8rem;font-family:'Roboto',sans-serif;outline:none;-webkit-appearance:none}
 .chat-input:focus{border-color:var(--gold)}
 .chat-send{background:var(--gold);border:none;border-radius:8px;padding:0.5rem 0.8rem;color:#000;font-weight:700;cursor:pointer;font-size:0.8rem}
 .chat-send:disabled{opacity:0.4;cursor:not-allowed}
@@ -125,6 +127,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .chat-link-default:hover{background:linear-gradient(135deg,#D9B85C,#9B7924)}
 .chat-link-scroll{background:rgba(184,134,11,0.08);border:1px solid rgba(184,134,11,0.3);color:var(--gold)!important;text-shadow:none;box-shadow:none}
 .chat-link-scroll:hover{background:rgba(184,134,11,0.18);border-color:var(--gold)}
+
+/* Typing Indicator Animation */
+.typing-indicator{display:flex;align-items:center;gap:4px;padding:4px 0}
+.typing-indicator span{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;animation:bounce-typing 1.3s infinite ease-in-out}
+.typing-indicator span:nth-child(2){animation-delay:0.15s}
+.typing-indicator span:nth-child(3){animation-delay:0.3s}
+@keyframes bounce-typing{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 
 /* BEAUTY SPOTLIGHT & SPARKLE EFFECTS */
 @keyframes spotlight{0%{opacity:0.4;transform:translateX(-30%)}50%{opacity:0.7}100%{opacity:0.4;transform:translateX(30%)}}
@@ -264,7 +273,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   .hero-banner{height:50vh;min-height:360px;max-height:520px}
   .salon-slider{height:200px}
   .gallery-item{flex:0 0 82%;height:360px}
-  .chat-panel{width:100%;max-width:100%;right:0;bottom:0!important;height:65vh;max-height:75vh;border-radius:20px 20px 0 0;border-bottom:none;border-left:none;border-right:none}
+  .chat-panel{width:100%;max-width:100%;right:0;bottom:0;height:65vh;max-height:75vh;border-radius:20px 20px 0 0;border-bottom:none;border-left:none;border-right:none;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease}
+  .chat-panel.open{transform:translateY(0);opacity:1}
+  .chat-input{font-size:16px}
   .chat-input-row{padding-bottom:calc(0.6rem + env(safe-area-inset-bottom, 0px))}
   .chat-fab{bottom:16px;right:12px;width:62px;height:62px}
   .svc-grid{grid-template-columns:1fr 1fr;gap:0.5rem;padding:0}
@@ -285,12 +296,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 /* Safe area padding for notched phones */
 @supports(padding-bottom: env(safe-area-inset-bottom)){
   .chat-fab{bottom:calc(16px + env(safe-area-inset-bottom))}
-  .chat-panel{bottom:calc(12px + env(safe-area-inset-bottom))}
   .footer{padding-bottom:calc(2rem + env(safe-area-inset-bottom))}
+  @media(min-width:481px){
+    .chat-panel{bottom:calc(12px + env(safe-area-inset-bottom))}
+  }
 }
 </style>
 </head>
 <body>
+<h1 class="sr-only">Studio-D Brickell — Premium Hair & Beauty Salon in Mary Brickell Village, Miami</h1>
 <canvas id="bgCanvas"></canvas>
 
 <!-- LANG SELECTOR -->
@@ -432,7 +446,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 <section class="section" id="services-section">
 <div class="glass-card">
 <div class="sec-sub" data-en="Our Services" data-pt="Nossos Serviços" data-es="Nuestros Servicios"></div>
-<div class="sec-title" data-en="Full-Service Premium Salon" data-pt="Salão Premium Completo" data-es="Salón Premium Completo"></div>
+<h2 class="sec-title" data-en="Full-Service Premium Salon" data-pt="Salão Premium Completo" data-es="Salón Premium Completo"></h2>
 <p class="sec-desc" data-en="45+ beauty services by 25+ professionals" data-pt="45+ serviços de beleza com 25+ profissionais" data-es="45+ servicios de belleza con 25+ profesionales"></p>
 <div class="svc-grid">
 <a class="svc-item" href="https://booking.mangomint.com/667750?serviceId=hair" target="_blank" rel="noopener"><span class="svc-icon">✂️</span><span class="svc-name" data-en="Hair" data-pt="Cabelo" data-es="Cabello"></span><span class="svc-detail" data-en="Cuts · Color · Extensions" data-pt="Cortes · Cor · Extensões" data-es="Cortes · Color · Extensiones"></span></a>
@@ -458,7 +472,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 <section class="section">
 <div class="glass-card">
 <div class="sec-sub" data-en="About Us" data-pt="Sobre Nós" data-es="Sobre Nosotros"></div>
-<div class="sec-title" data-en="Who We Are" data-pt="Quem Somos" data-es="Quiénes Somos"></div>
+<h2 class="sec-title" data-en="Who We Are" data-pt="Quem Somos" data-es="Quiénes Somos"></h2>
 <p class="about-text" data-en="High-quality beauty services that build your confidence and transform your looks are what you can expect at Studio-D Brickell. We are your premier high-end salon in Miami, FL. Whether you're looking for a fabulous hairstyle, eyelash extensions, Keratin treatment, or another personalized service — you've come to the right place." data-pt="Serviços de beleza de alta qualidade que constroem sua confiança e transformam seu visual é o que você pode esperar no Studio-D Brickell. Somos seu salão premium em Miami, FL. Seja um penteado fabuloso, extensões de cílios, tratamento de Keratina ou outro serviço personalizado — você veio ao lugar certo." data-es="Servicios de belleza de alta calidad que construyen tu confianza y transforman tu look es lo que puedes esperar en Studio-D Brickell. Somos tu salón premium en Miami, FL. Ya sea un peinado fabuloso, extensiones de pestañas, tratamiento de Keratina u otro servicio personalizado — has llegado al lugar indicado."></p>
 <div class="about-badge">
 <span>🏆</span>
@@ -471,7 +485,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 <section class="section" id="team-section">
 <div class="glass-card">
 <div class="sec-sub" data-en="Meet the Team" data-pt="Conheça a Equipe" data-es="Conoce al Equipo"></div>
-<div class="sec-title" data-en="25+ Professionals" data-pt="25+ Profissionais" data-es="25+ Profesionales"></div>
+<h2 class="sec-title" data-en="25+ Professionals" data-pt="25+ Profissionais" data-es="25+ Profesionales"></h2>
 <div class="team-scroll">
 <div class="team-card" style="background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%), url('assets/downloaded/Julian-582x1024.jpeg') center top/cover;">
 <div class="team-name">Julian Payan</div>
@@ -1137,8 +1151,10 @@ function toggleChat() {
   chatOpen = !chatOpen;
   var panel = document.getElementById('chatPanel');
   var fab = document.getElementById('chatFab');
-  panel.classList.toggle('open', chatOpen);
-  fab.style.display = chatOpen ? 'none' : 'flex';
+  if (panel && fab) {
+    panel.classList.toggle('open', chatOpen);
+    fab.classList.toggle('hidden', chatOpen);
+  }
   if (chatOpen && !chatGreetingShown) {
     chatGreetingShown = true;
     var greetings = {
@@ -1147,6 +1163,49 @@ function toggleChat() {
       es: "¡Hola! ✨ Soy la concierge virtual de Studio-D. Pregúntame sobre servicios, precios, equipo u horarios. ¿En qué puedo ayudarte?"
     };
     addChatMsg('bot', greetings[currentLang] || greetings.en);
+  }
+  if (!chatOpen && panel) {
+    panel.style.bottom = '';
+    panel.style.height = '';
+  } else if (chatOpen && window.visualViewport) {
+    adjustChatViewport();
+  }
+}
+
+function adjustChatViewport() {
+  var panel = document.getElementById('chatPanel');
+  if (!panel || !chatOpen) return;
+  if (window.innerWidth <= 480 && window.visualViewport) {
+    var vv = window.visualViewport;
+    var heightDiff = window.innerHeight - vv.height;
+    panel.style.bottom = heightDiff + 'px';
+    panel.style.height = (vv.height * 0.7) + 'px';
+  } else {
+    panel.style.bottom = '';
+    panel.style.height = '';
+  }
+}
+
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', adjustChatViewport);
+  window.visualViewport.addEventListener('scroll', adjustChatViewport);
+}
+
+function addTypingIndicator() {
+  var body = document.getElementById('chatBody');
+  if (!body) return;
+  var div = document.createElement('div');
+  div.className = 'chat-msg bot typing';
+  div.id = 'chatTypingIndicator';
+  div.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  var indicator = document.getElementById('chatTypingIndicator');
+  if (indicator) {
+    indicator.remove();
   }
 }
 
@@ -1186,7 +1245,7 @@ function addChatMsg(role, text) {
     
     // 2. Clean the text (remove prepositions and URLs, fix punctuation)
     var cleanText = text
-      .replace(/(?::\s*|\s*-\s*|\s+)?(?:en\s+|a\s+|at\s+|in\s+)?https?:\/\/[^\s,;()]+/gi, '')
+      .replace(/(?::\s*|\s*-\s*|\s+)?(?:en\s+|a\s+|at\s+|in\s+|em\s+|para\s+)?https?:\/\/[^\s,;()]+/gi, '')
       .replace(/\s+/g, ' ')
       .replace(/\s*,\s*,/g, ',')
       .replace(/\s*,\s*\./g, '.')
@@ -1295,15 +1354,16 @@ function showCTAs() {
   var div = document.createElement('div');
   div.className = 'chat-msg cta';
   var labels = {
-    en: {title: "You've used your free questions! Continue through:", wa: '💬 WhatsApp', review: '⭐ Leave a Review', call: '📞 Call Us'},
-    pt: {title: 'Suas perguntas gratuitas acabaram! Continue por:', wa: '💬 WhatsApp', review: '⭐ Deixe Avaliação', call: '📞 Ligar'},
-    es: {title: '¡Has usado tus preguntas gratuitas! Continúa por:', wa: '💬 WhatsApp', review: '⭐ Deja tu Reseña', call: '📞 Llámanos'}
+    en: {title: "You've used your free questions! Continue through:", book: '📅 Book Online', wa: '💬 WhatsApp', review: '⭐ Leave a Review', call: '📞 Call Us'},
+    pt: {title: 'Suas perguntas gratuitas acabaram! Continue por:', book: '📅 Agendar Online', wa: '💬 WhatsApp', review: '⭐ Deixe Avaliação', call: '📞 Ligar'},
+    es: {title: '¡Has usado tus preguntas gratuitas! Continúa por:', book: '📅 Reservar Online', wa: '💬 WhatsApp', review: '⭐ Deja tu Reseña', call: '📞 Llámanos'}
   };
   var l = labels[currentLang] || labels.en;
   div.innerHTML = '<div style="font-size:0.75rem;color:var(--gold);margin-bottom:0.5rem;font-weight:600">' + l.title + '</div>' +
-    '<a href="https://wa.me/13053494969" target="_blank" style="background:var(--wa);color:#fff;border-radius:6px">' + l.wa + '</a>' +
-    '<a href="https://g.page/r/CblyiDU7hjArEBE/review" target="_blank" style="background:rgba(255,193,7,0.2);color:#FFC107;border:1px solid rgba(255,193,7,0.3);border-radius:6px">' + l.review + '</a>' +
-    '<a href="tel:+13053494969" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:6px">' + l.call + '</a>';
+    '<a href="https://booking.mangomint.com/667750" target="_blank" style="background:linear-gradient(135deg,#FFD700,#B8860B);color:#000;font-weight:700;border-radius:6px;margin:0.3rem">' + l.book + '</a>' +
+    '<a href="https://wa.me/13053494969" target="_blank" style="background:var(--wa);color:#fff;border-radius:6px;margin:0.3rem">' + l.wa + '</a>' +
+    '<a href="https://g.page/r/CblyiDU7hjArEBE/review" target="_blank" style="background:rgba(255,193,7,0.2);color:#FFC107;border:1px solid rgba(255,193,7,0.3);border-radius:6px;margin:0.3rem">' + l.review + '</a>' +
+    '<a href="tel:+13053494969" style="background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:6px;margin:0.3rem">' + l.call + '</a>';
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
   document.getElementById('chatInputRow').style.display = 'none';
@@ -1336,7 +1396,7 @@ async function sendChat() {
 
   var sendBtn = document.getElementById('chatSend');
   sendBtn.disabled = true;
-  addChatMsg('bot', '...');
+  addTypingIndicator();
 
   try {
     var res = await fetch('/api/chat', {
@@ -1350,10 +1410,7 @@ async function sendChat() {
     });
     
     var reply = "";
-    var body = document.getElementById('chatBody');
-    if (body.lastChild && body.lastChild.textContent === '...') {
-      body.removeChild(body.lastChild); // remove "..."
-    }
+    removeTypingIndicator();
 
     if (res.ok) {
       var data = await res.json();
@@ -1369,10 +1426,7 @@ async function sendChat() {
     chatHistory.push({role: 'model', parts: [{text: reply}]});
     addChatMsg('bot', reply);
   } catch(e) {
-    var body2 = document.getElementById('chatBody');
-    if (body2.lastChild && body2.lastChild.textContent === '...') {
-      body2.removeChild(body2.lastChild);
-    }
+    removeTypingIndicator();
     var reply = getLocalFallbackResponse(msg, currentLang);
     chatHistory.push({role: 'model', parts: [{text: reply}]});
     addChatMsg('bot', reply);
@@ -1382,7 +1436,10 @@ async function sendChat() {
 
 // Enter key for chat
 document.getElementById('chatInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') sendChat();
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    sendChat();
+  }
 });
 
 // Register Service Worker for PWA
