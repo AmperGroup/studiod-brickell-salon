@@ -1,25 +1,14 @@
 {
-  "name": "Studio-D Brickell",
-  "short_name": "Studio-D",
-  "description": "Premium Beauty Salon in Brickell, Miami — Hair, Nails, Lashes, Facials & More",
+  "name": "Salon Lumière — Demo",
+  "short_name": "Salon Demo",
+  "description": "Página de muestra (negocio ficticio) de un salón de belleza premium — YourLegacy Tech",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#FDFBF7",
   "theme_color": "#FDFBF7",
   "orientation": "portrait-primary",
-  "lang": "en",
-  "icons": [
-    {
-      "src": "assets/downloaded/cropped-cropped-LOGO-2-1-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/downloaded/cropped-cropped-LOGO-2-1-270x270.png",
-      "sizes": "270x270",
-      "type": "image/png"
-    }
-  ],
+  "lang": "es",
+  "icons": [],
   "categories": ["beauty", "lifestyle"],
   "screenshots": [],
   "prefer_related_applications": false

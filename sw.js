@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studiod-cache-v1';
+const CACHE_NAME = 'salon-demo-cache-v2';
 const STATIC_ASSETS = [
   './',
   './index.html',
